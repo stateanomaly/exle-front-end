@@ -1,26 +1,26 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: 'Tom Cook',
+  email: 'tom@example.com',
   imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+}
 const navigation = [
-  { name: "Loans", href: "#", current: true },
-  { name: "Repayments", href: "#", current: false },
-  { name: "Information", href: "#", current: false },
-];
+  { name: 'Loans', href: '/', current: true },
+  { name: 'Repayments', href: '#', current: false },
+  { name: 'Information', href: '#', current: false }
+]
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
+  { name: 'Your Profile', href: '#' },
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '#' }
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function MainLayout({ children }) {
@@ -52,11 +52,11 @@ export default function MainLayout({ children }) {
                               href={item.href}
                               className={classNames(
                                 item.current
-                                  ? "bg-gray-900 text-white"
-                                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                "px-3 py-2 rounded-md text-sm font-medium"
+                                  ? 'bg-gray-900 text-white'
+                                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                'px-3 py-2 rounded-md text-sm font-medium'
                               )}
-                              aria-current={item.current ? "page" : undefined}
+                              aria-current={item.current ? 'page' : undefined}
                             >
                               {item.name}
                             </a>
@@ -101,11 +101,11 @@ export default function MainLayout({ children }) {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "block px-3 py-2 rounded-md text-base font-medium"
+                          ? 'bg-gray-900 text-white'
+                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'block px-3 py-2 rounded-md text-base font-medium'
                       )}
-                      aria-current={item.current ? "page" : undefined}
+                      aria-current={item.current ? 'page' : undefined}
                     >
                       {item.name}
                     </a>
@@ -132,5 +132,5 @@ export default function MainLayout({ children }) {
         </div>
       </main>
     </div>
-  );
+  )
 }
