@@ -2,7 +2,7 @@ import Head from 'next/head'
 import MainLayout from 'components/main-layout'
 import LoanList from 'components/loan-list.js'
 
-export default function Home() {
+export default function PageHome() {
   return (
     <div className="">
       <Head>
@@ -11,12 +11,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <MainLayout>
-          <LoanList />
-        </MainLayout>
+      <MainLayout>
+        <LoanList />
+      </MainLayout>
     </div>
   )
 }
-
-
-
