@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import MainLayout from 'components/main-layout'
 import Loan from 'components/loan'
+import mockLoans from 'mocks/loan'
+import _ from 'lodash'
 
 export default function PageLoan({ loan }) {
   return (
@@ -16,12 +18,19 @@ export default function PageLoan({ loan }) {
 }
 
 export const getServerSideProps = async ({ query, params }) => {
-  const { loan: id } = params
+  const loan = _.find(mockLoans, { id: parseInt(params.loan) })
+  if (!loan) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
   return {
     props: {
-      loan: {
-        ...(id && { id })
-      }
+      loan
     }
   }
 }

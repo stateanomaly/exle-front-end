@@ -2,86 +2,11 @@ import Link from 'next/link'
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid'
 import { UsersIcon } from '@heroicons/react/outline'
 
-const stats = [
-  {
-    id: 1,
-    name: 'Loan 1',
-    stat: '21 Erg',
-    icon: UsersIcon,
-    change: '122',
-    changeType: 'increase'
-  },
-  {
-    id: 2,
-    name: 'Loan 2',
-    stat: '48 Erg',
-    icon: UsersIcon,
-    change: '5.4%',
-    changeType: 'increase'
-  },
-  {
-    id: 3,
-    name: 'Loan 3',
-    stat: '56 Erg',
-    icon: UsersIcon,
-    change: '3.2%',
-    changeType: 'decrease'
-  },
-  {
-    id: 4,
-    name: 'Loan 4',
-    stat: '64 Erg',
-    icon: UsersIcon,
-    change: '5.4%',
-    changeType: 'increase'
-  },
-  {
-    id: 5,
-    name: 'Loan 5',
-    stat: '34 Erg',
-    icon: UsersIcon,
-    change: '5.4%',
-    changeType: 'increase'
-  },
-  {
-    id: 6,
-    name: 'Loan 6',
-    stat: '72 Erg',
-    icon: UsersIcon,
-    change: '5.4%',
-    changeType: 'increase'
-  },
-  {
-    id: 7,
-    name: 'Loan 7',
-    stat: '1465 Erg',
-    icon: UsersIcon,
-    change: '5.4%',
-    changeType: 'increase'
-  },
-  {
-    id: 8,
-    name: 'Loan 8',
-    stat: '44 Erg',
-    icon: UsersIcon,
-    change: '5.4%',
-    changeType: 'increase'
-  },
-  {
-    id: 9,
-    name: 'Loan 9',
-    stat: '974564 Erg',
-    icon: UsersIcon,
-    change: '5.4%',
-    changeType: 'increase'
-  }
-]
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function LoanList() {
+export default function LoanList({ loanData }) {
   return (
     <div>
       <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -89,19 +14,13 @@ export default function LoanList() {
       </h3>
 
       <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map((item) => (
-          <Link
-            key={item.id}
-            href={{
-              pathname: '/loan/[loan]',
-              query: { loan: item.id }
-            }}
-          >
+        {loanData.map((item) => (
+          <Link key={item.id} href={`/loan/${item.id}`}>
             <a>
               <div className="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                 <dt>
                   <div className="absolute bg-indigo-500 rounded-md p-3">
-                    <item.icon
+                    <UsersIcon
                       className="h-6 w-6 text-white"
                       aria-hidden="true"
                     />
