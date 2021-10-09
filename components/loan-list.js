@@ -1,10 +1,6 @@
 import Link from 'next/link'
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid'
-import {
-  CursorClickIcon,
-  MailOpenIcon,
-  UsersIcon
-} from '@heroicons/react/outline'
+import { UsersIcon } from '@heroicons/react/outline'
 
 const stats = [
   {
@@ -148,18 +144,11 @@ export default function LoanList() {
                   </p>
                   <div className="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                     <div className="text-sm">
-                      <Link
-                        href={{
-                          pathname: '/loan/[loan]',
-                          query: { loan: item.id }
-                        }}
-                      >
-                        <a className="font-medium text-indigo-600 hover:text-indigo-500">
-                          {' '}
-                          View loan
-                          <span className="sr-only"> {item.name} stats</span>
-                        </a>
-                      </Link>
+                      <span className="font-medium text-indigo-600 hover:text-indigo-500">
+                        {' '}
+                        View loan
+                        <span className="sr-only"> {item.name} stats</span>
+                      </span>
                     </div>
                   </div>
                 </dd>

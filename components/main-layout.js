@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import Image from 'next/image'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 
@@ -35,10 +36,11 @@ export default function MainLayout({ children }) {
                   <div className="flex items-center justify-between h-16 px-4 sm:px-0">
                     <div className="flex items-center">
                       <div className="flex-shrink-0">
-                        <img
-                          className="h-8 w-8"
+                        <Image
                           src="/ergo-dark.png"
-                          alt="Workflow"
+                          alt="Ergoplatform.com logo"
+                          width={40}
+                          height={40}
                         />
                       </div>
                       <div className="pl-3">
