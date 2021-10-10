@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, set the env.local variable NEXT_PUBLIC_API_BASE_URL to your scala backend server route (or ngrok tunnel address)
+
+```dotenv
+NEXT_PUBLIC_API_BASE_URL="https://some-ngrok-location/"
+```
+
+Second, run the development server:
 
 ```bash
 npm run dev
