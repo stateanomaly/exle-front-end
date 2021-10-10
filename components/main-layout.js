@@ -31,16 +31,24 @@ export default function MainLayout({ children, showCreate = true }) {
                 <div className="border-b border-gray-700">
                   <div className="flex items-center justify-between h-16 px-4 sm:px-0">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0">
-                        <Image
-                          src="/ergo-dark.png"
-                          alt="Ergoplatform.com logo"
-                          width={40}
-                          height={40}
-                        />
+                      <div className="flex-shrink-0 cursor-pointer">
+                        <Link href={`/`}>
+                          <a>
+                            <Image
+                              src="/ergo-dark.png"
+                              alt="Ergoplatform.com logo"
+                              width={40}
+                              height={40}
+                            />
+                          </a>
+                        </Link>
                       </div>
                       <div className="pl-3">
-                        <h1 className="text-white">Ergo Lend</h1>
+                        <Link href={`/`} passHref>
+                          <a>
+                            <h1 className="text-white">Ergo Lend</h1>
+                          </a>
+                        </Link>
                       </div>
                       <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
