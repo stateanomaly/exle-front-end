@@ -1,5 +1,7 @@
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ergoBoxFromProxy, RustModule } from '@ergolabs/ergo-sdk'
 
 import { Disclosure } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
@@ -20,7 +22,29 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const connectYoroiWallet = () => {
+  if (!window.ergo_request_read_access) {
+    return Promise.reject(new Error(WARNING_MESSAGE.YOROI))
+  }
+
+  return window.ergo_request_read_access().then(() => {
+    ergo
+      .get_utxos()
+      .then((bs) => bs?.map((b) => ergoBoxFromProxy(b)))
+      .then((data) => {
+        console.log(data)
+      })
+  })
+}
+
 export default function MainLayout({ children, showCreate = true }) {
+  const [isRustModuleLoaded, setIsRustModuleLoaded] = useState(false)
+  useEffect(() => {
+    RustModule.load().then(() => setIsRustModuleLoaded(true))
+  }, [])
+  if (!isRustModuleLoaded) {
+    return null
+  }
   return (
     <div>
       <div className="bg-gray-800 pb-32">
@@ -72,6 +96,13 @@ export default function MainLayout({ children, showCreate = true }) {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-4 flex items-center md:ml-6">
+                        <button
+                          type="button"
+                          className="bg-gray-800 p-1 text-gray-400 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                          onClick={connectYoroiWallet}
+                        >
+                          Connect Wallet
+                        </button>
                         <button
                           type="button"
                           className="bg-gray-800 p-1 text-gray-400 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
