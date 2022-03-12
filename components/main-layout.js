@@ -14,7 +14,7 @@ const user = {
 }
 const navigation = [
   { name: 'Loans', href: '/', current: true },
-  { name: 'Repayments', href: '#', current: false },
+  { name: 'Repayments', href: '/repayments', current: false },
   { name: 'Information', href: '#', current: false }
 ]
 
@@ -30,8 +30,8 @@ const connectYoroiWallet = () => {
   return window.ergo_request_read_access().then(() => {
     ergo
       .get_utxos()
-      .then((bs) => bs?.map((b) => ergoBoxFromProxy(b)))
-      .then((data) => {
+      .then(bs => bs?.map(b => ergoBoxFromProxy(b)))
+      .then(data => {
         console.log(data)
       })
   })
@@ -46,7 +46,7 @@ export default function MainLayout({ children, showCreate = true }) {
     return null
   }
   return (
-    <div>
+    <div className="min-h-screen bg-gray-800">
       <div className="bg-gray-800 pb-32">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
@@ -76,7 +76,7 @@ export default function MainLayout({ children, showCreate = true }) {
                       </div>
                       <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
-                          {navigation.map((item) => (
+                          {navigation.map(item => (
                             <a
                               key={item.name}
                               href={item.href}
@@ -132,7 +132,7 @@ export default function MainLayout({ children, showCreate = true }) {
 
               <Disclosure.Panel className="border-b border-gray-700 md:hidden">
                 <div className="px-2 py-3 space-y-1 sm:px-3">
-                  {navigation.map((item) => (
+                  {navigation.map(item => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -174,10 +174,10 @@ export default function MainLayout({ children, showCreate = true }) {
         </header>
       </div>
 
-      <main className="-mt-32">
-        <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+      <main className="-mt-48">
+        <div className="max-w-7xl mx-auto">
           {/* Replace with your content */}
-          <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+          <div className="bg-gray-800 px-4 py-6 md:px-8 sm:px-6">
             {children}
           </div>
           {/* /End replace */}

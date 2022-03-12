@@ -53,55 +53,85 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Loan({ loanData }) {
-  const { id } = loanData
-  return (
-    <div className="relative min-h-screen bg-gray-100">
-      <main className="py-10">
-        {/* Page header */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
-          <div className="flex items-center space-x-5">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Loan {id}</h1>
-              <p className="text-sm font-medium text-gray-500">
-                Created on <time dateTime="2020-08-25">October 8, 2021</time>
-              </p>
-            </div>
-          </div>
-        </div>
+const getFundStatus = isFunded => {
+  if (isFunded) {
+    return (
+      <div className="text-sm font-small text-green-500 flex truncate text-green-200">
+        Funded
+      </div>
+    )
+  } else {
+    return (
+      <div className="text-sm font-small text-green-500 flex truncate text-yellow-200">
+        Funding in Process
+      </div>
+    )
+  }
+}
 
-        <div className="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+const getDetails = loanData => {
+  return (
+    <div className="border-t border-gray-200 py-5">
+      <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+        <div className="sm:col-span-2">
+          <dt className="text-sm font-medium text-green-500">Description</dt>
+          <dd className="mt-1 mb-2 text-sm text-green-700">
+            {loanData.description}
+          </dd>
+          <dt className="text-sm font-medium text-green-500">Funding Goal</dt>
+          <dd className="mt-1 mb-2 text-sm text-green-700">
+            {loanData.fundingGoalInErgs} Ergs
+          </dd>
+          <dt className="text-sm font-medium text-green-500">Interest Rate</dt>
+          <dd className="mt-1 mb-2 text-sm text-green-700">
+            {loanData.interestRate}%
+          </dd>
+          <dt className="text-sm font-medium text-green-500">Deadline</dt>
+          <dd className="mt-1 mb-2 text-sm text-green-700">
+            {loanData.deadline}
+          </dd>
+          <dt className="text-sm font-medium text-green-500">Is Funded?</dt>
+          <dd className="mt-1 mb-2 text-sm text-green-700">
+            {getFundStatus(loanData.isFunded)}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  )
+}
+
+export default function Loan({ loanData }) {
+  const { name, description, borrowerPk } = loanData
+  return (
+    <div className="relative bg-gray-900 sm:rounded-lg my-4">
+      <main className="py-6">
+        {/* Page header */}
+        <div className="mt-2 max-w-3xl mx-auto grid grid-cols-1 gap-6 xs:px-8 sm:px-8 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
           <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+            <div className="max-w-3xl mx-auto md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl">
+              <div className="flex items-center space-x-5">
+                <div>
+                  <h1 className="text-2xl font-bold text-yellow-300">{name}</h1>
+                </div>
+              </div>
+            </div>
+
             {/* Description list*/}
             <section aria-labelledby="applicant-information-title">
-              <div className="bg-white shadow sm:rounded-lg">
-                <div className="px-4 py-5 sm:px-6">
+              <div>
+                <div className="py-5">
                   <h2
                     id="applicant-information-title"
-                    className="text-lg leading-6 font-medium text-gray-900"
+                    className="text-lg leading-6 font-medium text-green-700"
+                    style={{ overflowWrap: 'anywhere' }}
                   >
-                    Applicant Information
+                    {borrowerPk}
                   </h2>
-                  <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                    Personal details and application.
+                  <p className="mt-1 max-w-2xl text-sm text-green-500">
+                    Borrower PK
                   </p>
                 </div>
-                <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-                  <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                    <div className="sm:col-span-2">
-                      <dt className="text-sm font-medium text-gray-500">
-                        About
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900">
-                        Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
-                        anim incididunt cillum culpa consequat. Excepteur qui
-                        ipsum aliquip consequat sint. Sit id mollit nulla mollit
-                        nostrud in ea officia proident. Irure nostrud pariatur
-                        mollit ad adipisicing reprehenderit deserunt qui eu.
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
+                {getDetails(loanData)}
               </div>
             </section>
           </div>
