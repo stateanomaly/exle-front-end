@@ -1,11 +1,14 @@
+import { useState } from 'react'
 import { CheckIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
 import MiddleEllipsis from 'react-middle-ellipsis'
+import { getExplorerAddressUri } from '../helper/explorer-helper'
 
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
   advanced: { icon: ThumbUpIcon, bgColorClass: 'bg-blue-500' },
   completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' }
 }
+
 const termsOfUse = [
   {
     id: 1,
@@ -102,8 +105,22 @@ const getActivityFeed = () => {
   )
 }
 
+const getLenderPk = lenderPk => {
+  if (lenderPk) {
+    return (
+      <div>
+        <dt className="text-sm font-medium text-green-500">Lender PK</dt>
+        <dd className="mt-1 mb-2 text-sm text-green-700 hover:text-green-800">
+          <a href={getExplorerAddressUri(lenderPk)}>{lenderPk}</a>
+        </dd>
+      </div>
+    )
+  }
+}
+
 const getDetails = loanData => {
   const { boxState } = loanData
+  const isRepayment = boxState.toLowerCase() === 'repayment'
   return (
     <div className="border-t border-gray-200 py-5">
       <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -112,8 +129,6 @@ const getDetails = loanData => {
           <dd className="mt-1 mb-2 text-sm text-green-700">
             {loanData.description}
           </dd>
-          <dt className="text-sm font-medium text-green-500">BoxState</dt>
-          <dd className="mt-1 mb-2 text-sm text-yellow-500">{boxState}</dd>
           <dt className="text-sm font-medium text-green-500">Funding Goal</dt>
           <dd className="mt-1 mb-2 text-sm text-green-700">
             {loanData.fundingGoalInErgs} Ergs
@@ -126,17 +141,52 @@ const getDetails = loanData => {
           <dd className="mt-1 mb-2 text-sm text-green-700">
             {loanData.deadline}
           </dd>
-          <dt className="text-sm font-medium text-green-500">Is Funded?</dt>
+          <dt className="text-sm font-medium text-green-500">
+            Is Loan Funded?
+          </dt>
           <dd className="mt-1 mb-2 text-sm text-green-700">
-            {getFundStatus(loanData.isFunded)}
+            {getFundStatus(isRepayment || loanData.isFunded)}
           </dd>
+          {getLenderPk(loanData.lenderPk)}
+          {getRepaymentDetails(loanData)}
         </div>
       </dl>
     </div>
   )
 }
 
-const getFundingDetails = () => {
+const getRepaymentDetails = loanData => {
+  const { boxState } = loanData
+  if (boxState.toLowerCase() === 'repayment') {
+    return (
+      <div>
+        <dt className="text-sm font-medium text-green-500">Funded Height</dt>
+        <dd className="mt-1 mb-2 text-sm text-green-700">
+          {loanData.fundedHeight} Ergs
+        </dd>
+        <dt className="text-sm font-medium text-green-500">Repayment Amount</dt>
+        <dd className="mt-1 mb-2 text-sm text-green-700">
+          {loanData.repaymentAmountInErgs} Ergs
+        </dd>
+        <dt className="text-sm font-medium text-green-500">
+          Repayment Deadline
+        </dt>
+        <dd className="mt-1 mb-2 text-sm text-green-700">
+          Block {loanData.repaymentHeightGoal}
+        </dd>
+        <dt className="text-sm font-medium text-green-500">
+          Is Repayment Funded?
+        </dt>
+        <dd className="mt-1 mb-2 text-sm text-green-700">
+          {getFundStatus(loanData.isFunded)}
+        </dd>
+      </div>
+    )
+  }
+}
+
+const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
+  console.log(isTermsOfUseChecked)
   return (
     <section
       aria-labelledby="timeline-title"
@@ -154,17 +204,41 @@ const getFundingDetails = () => {
           </h3>
           <ul role="list">
             {termsOfUse.map(item => (
-              <li key={item.id}>
+              <li key={item.id} className="mt-1">
                 <p className="text-xs text-gray-500">- {item.content} </p>
               </li>
             ))}
           </ul>
-          <a
+          <div className="relative flex items-start mt-3 align-middle">
+            <div className="flex items-center h-5">
+              <input
+                id="offers"
+                aria-describedby="offers-description"
+                name="offers"
+                type="checkbox"
+                className="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded"
+                checked={isTermsOfUseChecked}
+                onChange={e => {
+                  setIsTermsOfUseChecked(e.target.checked)
+                }}
+              />
+            </div>
+            <div className="ml-3 text-xs font-bold flex align-middle">
+              <span id="offers-description" className="text-gray-500">
+                I agree to the terms of use
+              </span>
+            </div>
+          </div>
+          <button
             type="button"
-            className="mt-6 flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-700 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 uppercase"
+            className="mt-6 flex w-full justify-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-900 disabled:text-gray-300 uppercase"
+            disabled={!isTermsOfUseChecked}
+            onClick={() => {
+              console.log('dance')
+            }}
           >
             Fund this loan
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -172,7 +246,7 @@ const getFundingDetails = () => {
 }
 
 export default function Loan({ loanData }) {
-  console.log(loanData)
+  const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
   const { name, description, borrowerPk, boxState } = loanData
   return (
     <div className="relative bg-gray-900 sm:rounded-lg my-4">
@@ -193,13 +267,14 @@ export default function Loan({ loanData }) {
             <section aria-labelledby="applicant-information-title">
               <div>
                 <div className="py-5">
-                  <h2
+                  <a
                     id="applicant-information-title"
-                    className="text-lg leading-6 font-medium text-green-700"
+                    className="text-lg leading-6 font-medium text-green-700 hover:text-green-800"
+                    href={getExplorerAddressUri(borrowerPk)}
                     style={{ overflowWrap: 'anywhere' }}
                   >
                     {borrowerPk}
-                  </h2>
+                  </a>
                   <p className="mt-1 max-w-2xl text-sm text-green-500">
                     Borrower PK
                   </p>
@@ -208,7 +283,7 @@ export default function Loan({ loanData }) {
               </div>
             </section>
           </div>
-          {getFundingDetails()}
+          {getFundingDetails(isTermsOfUseChecked, setIsTermsOfUseChecked)}
         </div>
       </main>
     </div>

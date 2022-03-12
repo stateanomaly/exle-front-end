@@ -23,17 +23,18 @@ export default function LoanCard({ loan }) {
     }
   }
 
-  const getFundStatus = isFunded => {
-    if (isFunded) {
+  const getFundStatus = (isFunded, boxState) => {
+    const isRepayment = boxState.toLowerCase() === 'repayment'
+    if (isFunded || isRepayment) {
       return (
         <div className="text-sm font-small text-green-500 flex truncate">
-          fundingStatus: &nbsp; <div className="text-green-200">Funded</div>
+          loanStatus: &nbsp; <div className="text-green-200">Funded</div>
         </div>
       )
     } else {
       return (
         <div className="text-sm font-small text-green-500 flex truncate">
-          fundingStatus: &nbsp;{' '}
+          loanStatus: &nbsp;{' '}
           <div className="text-yellow-200">Funding in Process</div>
         </div>
       )
@@ -90,9 +91,9 @@ export default function LoanCard({ loan }) {
     }
 
     return (
-      <p className={styleClass} style={{ overflowWrap: 'anywhere' }}>
+      <div className={styleClass} style={{ overflowWrap: 'anywhere' }}>
         {title}: {description}
-      </p>
+      </div>
     )
   }
 
@@ -109,7 +110,7 @@ export default function LoanCard({ loan }) {
                 {getLine('deadline', 'Block ' + loan.deadline)}
                 {getLine('boxState', loan.boxState)}
                 {getLine('interestRate', loan.interestRate + '%')}
-                {getFundStatus(loan.isFunded)}
+                {getFundStatus(loan.isFunded, loan.boxState)}
                 {getLine('borrowerPk', loan.borrowerPk)}
               </div>
               <div className="absolute bottom-0 inset-x-0 bg-gray-900 px-4 py-4 sm:px-6">

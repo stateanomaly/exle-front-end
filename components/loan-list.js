@@ -26,7 +26,7 @@ export default function LoanList({ title, loanData }) {
   }
 
   return (
-    <div className="mt-12">
+    <div>
       <h3 className="text-lg leading-6 font-medium text-green-500">
         {getTitle(title)}
       </h3>
