@@ -8,12 +8,12 @@ export default function LoanCreateForm() {
     handleSubmit,
     formState: { errors }
   } = useForm()
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     axios
       .post('/api/create', data, {
         headers: { 'Content-Type': 'application/json' }
       })
-      .then((res) => {
+      .then(res => {
         const submitIsSuccessful = res.data.ok
 
         if (submitIsSuccessful) {
@@ -26,7 +26,7 @@ export default function LoanCreateForm() {
       <div className="sm:col-span-4">
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-green-700"
         >
           Name
         </label>
@@ -46,7 +46,7 @@ export default function LoanCreateForm() {
       <div className="sm:col-span-6">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-green-700"
         >
           Description
         </label>
@@ -61,7 +61,7 @@ export default function LoanCreateForm() {
             <TextError>A Description is required</TextError>
           )}
         </div>
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="mt-2 text-sm text-green-500">
           Write a few sentences about what you intend to do with the loan.
         </p>
       </div>
@@ -69,7 +69,7 @@ export default function LoanCreateForm() {
       <div className="sm:col-span-4">
         <label
           htmlFor="walletAddress"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-green-700"
         >
           Wallet Address
         </label>
@@ -90,7 +90,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="goal"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-green-700"
           >
             Goal
           </label>
@@ -110,7 +110,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="deadlineHeight"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-green-700"
           >
             Deadline
           </label>
@@ -129,7 +129,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="interestRate"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-green-700"
           >
             Interest Rate
           </label>
@@ -149,7 +149,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="repaymentHeightLength"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-green-700"
           >
             Repayment Length
           </label>

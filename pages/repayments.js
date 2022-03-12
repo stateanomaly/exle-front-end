@@ -27,7 +27,7 @@ const fetchRepayments = async () => {
   return fetchData(repaymentApi)
 }
 
-export default function PageHome({ loans, repayments }) {
+export default function PageHome({ repayments }) {
   return (
     <div className="">
       <Head>
@@ -37,7 +37,7 @@ export default function PageHome({ loans, repayments }) {
       </Head>
 
       <MainLayout>
-        <LoanList title="loan" loanData={loans} />
+        <LoanList title="repayment" loanData={repayments} />
       </MainLayout>
     </div>
   )
@@ -49,7 +49,6 @@ export const getServerSideProps = async () => {
 
   return {
     props: {
-      loans,
       repayments
     }
   }
