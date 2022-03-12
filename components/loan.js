@@ -6,46 +6,30 @@ const eventTypes = {
   advanced: { icon: ThumbUpIcon, bgColorClass: 'bg-blue-500' },
   completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' }
 }
-const timeline = [
+const termsOfUse = [
   {
     id: 1,
-    type: eventTypes.applied,
-    content: 'created loan address',
-    target: '9gb3mPXuUbhVJrzvzR79d8hK5JTEWPduFfab4CkCFpr98dzQceG',
-    date: 'Sep 20',
-    datetime: '2020-09-20'
+    content:
+      'Creating or participating in raffles and receiving donations is not illegal in your country.'
   },
   {
     id: 2,
-    type: eventTypes.advanced,
-    content: 'Add funds of 3 Erg by',
-    target: '9ggCQdpJPSV9yekY8Mt8T1F2NmzEheY5egMZ7Z3ZXfUyziQe8Ey',
-    date: 'Sep 22',
-    datetime: '2020-09-22'
+    content:
+      'You are over the legal age required to use financial services such as running raffles and are not creating a raffle on behalf of an underage person or anyone who is not legally allowed to create raffles.'
   },
   {
     id: 3,
-    type: eventTypes.advanced,
-    content: 'Add funds of 3 Erg by',
-    target: '9ggCQdpJPSV9yekY8Mt8T1F2NmzEheY5egMZ7Z3ZXfUyziQe8Ey',
-    date: 'Sep 28',
-    datetime: '2020-09-28'
+    content:
+      'You are solely responsible for all legal or moral obligations and liabilities, and the service does not have any obligations or liabilities.'
   },
   {
     id: 4,
-    type: eventTypes.advanced,
-    content: 'Add funds of 3 Erg by',
-    target: '9ggCQdpJPSV9yekY8Mt8T1F2NmzEheY5egMZ7Z3ZXfUyziQe8Ey',
-    date: 'Sep 30',
-    datetime: '2020-09-30'
+    content:
+      'You understand that there is a risk that the loan is not repaid and ErgoLend is not liable to any of the loss incurred.'
   },
   {
     id: 5,
-    type: eventTypes.completed,
-    content: 'Loan Funded! Paid to',
-    target: '9hyTTDyCKBNKX2ZvFnuUkYmuEsMJYz3gQEyfAjSfsLRS2Yoiwbv',
-    date: 'Oct 4',
-    datetime: '2020-10-04'
+    content: 'You are solely responsible for any due taxes and legal reports.'
   }
 ]
 
@@ -69,7 +53,57 @@ const getFundStatus = isFunded => {
   }
 }
 
+const getActivityFeed = () => {
+  return (
+    <div className="mt-6 flow-root">
+      <ul role="list" className="-mb-8">
+        {timeline.map((item, itemIdx) => (
+          <li key={item.id}>
+            <div className="relative pb-8">
+              {itemIdx !== timeline.length - 1 ? (
+                <span
+                  className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                  aria-hidden="true"
+                />
+              ) : null}
+              <div className="relative flex space-x-3">
+                <div>
+                  <span
+                    className={classNames(
+                      item.type.bgColorClass,
+                      'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
+                    )}
+                  >
+                    <item.type.icon
+                      className="w-5 h-5 text-white"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
+                <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                  <div>
+                    <p className="text-sm text-gray-500">{item.content} </p>
+                    <div style={{ width: '140px' }}>
+                      <MiddleEllipsis>
+                        <span>{item.target}</span>
+                      </MiddleEllipsis>
+                    </div>
+                  </div>
+                  <div className="text-right text-sm whitespace-nowrap text-gray-500">
+                    <time dateTime={item.datetime}>{item.date}</time>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 const getDetails = loanData => {
+  const { boxState } = loanData
   return (
     <div className="border-t border-gray-200 py-5">
       <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -78,6 +112,8 @@ const getDetails = loanData => {
           <dd className="mt-1 mb-2 text-sm text-green-700">
             {loanData.description}
           </dd>
+          <dt className="text-sm font-medium text-green-500">BoxState</dt>
+          <dd className="mt-1 mb-2 text-sm text-yellow-500">{boxState}</dd>
           <dt className="text-sm font-medium text-green-500">Funding Goal</dt>
           <dd className="mt-1 mb-2 text-sm text-green-700">
             {loanData.fundingGoalInErgs} Ergs
@@ -100,18 +136,55 @@ const getDetails = loanData => {
   )
 }
 
+const getFundingDetails = () => {
+  return (
+    <section
+      aria-labelledby="timeline-title"
+      className="lg:col-start-3 lg:col-span-1"
+    >
+      <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+        <h2 id="timeline-title" className="text-lg font-medium text-gray-900">
+          Funding Details
+        </h2>
+
+        {/* Activity Feed */}
+        <div className="mt-6 flow-root">
+          <h3 id="timeline-title" className="text-md font-medium text-gray-900">
+            Terms of Use
+          </h3>
+          <ul role="list">
+            {termsOfUse.map(item => (
+              <li key={item.id}>
+                <p className="text-xs text-gray-500">- {item.content} </p>
+              </li>
+            ))}
+          </ul>
+          <a
+            type="button"
+            className="mt-6 flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-700 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 uppercase"
+          >
+            Fund this loan
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function Loan({ loanData }) {
-  const { name, description, borrowerPk } = loanData
+  console.log(loanData)
+  const { name, description, borrowerPk, boxState } = loanData
   return (
     <div className="relative bg-gray-900 sm:rounded-lg my-4">
       <main className="py-6">
         {/* Page header */}
         <div className="mt-2 max-w-3xl mx-auto grid grid-cols-1 gap-6 xs:px-8 sm:px-8 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-          <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+          <div className="lg:col-start-1 lg:col-span-2">
             <div className="max-w-3xl mx-auto md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl">
               <div className="flex items-center space-x-5">
                 <div>
                   <h1 className="text-2xl font-bold text-yellow-300">{name}</h1>
+                  <p className="text-md font-sm text-gray-300">{boxState}</p>
                 </div>
               </div>
             </div>
@@ -135,68 +208,7 @@ export default function Loan({ loanData }) {
               </div>
             </section>
           </div>
-
-          <section
-            aria-labelledby="timeline-title"
-            className="lg:col-start-3 lg:col-span-1"
-          >
-            <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-              <h2
-                id="timeline-title"
-                className="text-lg font-medium text-gray-900"
-              >
-                Timeline
-              </h2>
-
-              {/* Activity Feed */}
-              <div className="mt-6 flow-root">
-                <ul role="list" className="-mb-8">
-                  {timeline.map((item, itemIdx) => (
-                    <li key={item.id}>
-                      <div className="relative pb-8">
-                        {itemIdx !== timeline.length - 1 ? (
-                          <span
-                            className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
-                            aria-hidden="true"
-                          />
-                        ) : null}
-                        <div className="relative flex space-x-3">
-                          <div>
-                            <span
-                              className={classNames(
-                                item.type.bgColorClass,
-                                'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
-                              )}
-                            >
-                              <item.type.icon
-                                className="w-5 h-5 text-white"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </div>
-                          <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                            <div>
-                              <p className="text-sm text-gray-500">
-                                {item.content}{' '}
-                              </p>
-                              <div style={{ width: '140px' }}>
-                                <MiddleEllipsis>
-                                  <span>{item.target}</span>
-                                </MiddleEllipsis>
-                              </div>
-                            </div>
-                            <div className="text-right text-sm whitespace-nowrap text-gray-500">
-                              <time dateTime={item.datetime}>{item.date}</time>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
+          {getFundingDetails()}
         </div>
       </main>
     </div>
