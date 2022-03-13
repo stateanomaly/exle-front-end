@@ -271,7 +271,10 @@ export default function Loan({ loanData }) {
                     id="applicant-information-title"
                     className="text-lg font-medium text-green-700 hover:text-green-800"
                     href={getExplorerAddressUri(borrowerPk)}
-                    style={{ overflowWrap: 'anywhere' }}
+                    style={{
+                      overflowWrap: 'break-word',
+                      whiteSpace: 'pre-wrap'
+                    }}
                   >
                     {borrowerPk}
                   </a>
