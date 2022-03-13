@@ -46,6 +46,7 @@ export default function MainLayout({ children, showCreate = true }) {
   if (!isRustModuleLoaded) {
     return null
   }
+
   return (
     <div className="min-h-screen bg-gray-800">
       <div className="bg-gray-800 pb-32">
@@ -156,6 +157,7 @@ export default function MainLayout({ children, showCreate = true }) {
                         <a
                           key={item.name}
                           type="button"
+                          href={item.href}
                           className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                           Create Loan
@@ -187,7 +189,9 @@ export default function MainLayout({ children, showCreate = true }) {
         <header className="py-10">
           <div className="max-w-7xl mx-auto px-4 mb-8 sm:px-6 lg:px-8 md:flex">
             <h1 className="text-3xl font-bold text-white md:flex-grow">
-              Loan Details
+              This site is under construction! Reach out to our discord if you
+              see any issues or if you enjoy watching the construction. Use at
+              your own risk
             </h1>
           </div>
         </header>

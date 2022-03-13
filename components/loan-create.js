@@ -23,10 +23,10 @@ export default function LoanCreateForm() {
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="sm:col-span-4">
+      <div className="sm:col-span-4 mb-4">
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-green-700"
+          className="block text-md font-medium text-green-500"
         >
           Name
         </label>
@@ -35,7 +35,7 @@ export default function LoanCreateForm() {
             {...register('name', { required: true })}
             type="text"
             autoComplete="Name of Loan"
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
           />
           {errors.name?.type === 'required' && (
             <TextError>A Name is required</TextError>
@@ -43,10 +43,10 @@ export default function LoanCreateForm() {
         </div>
       </div>
 
-      <div className="sm:col-span-6">
+      <div className="sm:col-span-6 mb-4">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-green-700"
+          className="block text-sm font-medium text-green-500"
         >
           Description
         </label>
@@ -54,14 +54,14 @@ export default function LoanCreateForm() {
           <textarea
             {...register('description', { required: true })}
             rows={3}
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+            className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             defaultValue={''}
           />
           {errors.description?.type === 'required' && (
             <TextError>A Description is required</TextError>
           )}
         </div>
-        <p className="mt-2 text-sm text-green-500">
+        <p className="mt-2 text-sm text-green-700">
           Write a few sentences about what you intend to do with the loan.
         </p>
       </div>
@@ -69,7 +69,7 @@ export default function LoanCreateForm() {
       <div className="sm:col-span-4">
         <label
           htmlFor="walletAddress"
-          className="block text-sm font-medium text-green-700"
+          className="block text-sm font-medium text-green-500"
         >
           Wallet Address
         </label>
@@ -78,7 +78,7 @@ export default function LoanCreateForm() {
             {...register('walletAddress', { required: true })}
             type="text"
             autoComplete="Wallet Address"
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
           />
           {errors.walletAddress?.type === 'required' && (
             <TextError>A Wallet Address is required</TextError>
@@ -90,7 +90,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="goal"
-            className="block text-sm font-medium text-green-700"
+            className="block text-sm font-medium text-green-500"
           >
             Goal
           </label>
@@ -99,7 +99,7 @@ export default function LoanCreateForm() {
               type="number"
               {...register('goal', { required: true })}
               autoComplete="goal"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
             {errors.goal?.type === 'required' && (
               <TextError>A Goal is required</TextError>
@@ -110,7 +110,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="deadlineHeight"
-            className="block text-sm font-medium text-green-700"
+            className="block text-sm font-medium text-green-500"
           >
             Deadline
           </label>
@@ -119,7 +119,7 @@ export default function LoanCreateForm() {
               type="number"
               {...register('deadline', { required: true })}
               autoComplete="Deadline"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
             {errors.deadline?.type === 'required' && (
               <TextError>A Deadline is required</TextError>
@@ -129,7 +129,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="interestRate"
-            className="block text-sm font-medium text-green-700"
+            className="block text-sm font-medium text-green-500"
           >
             Interest Rate
           </label>
@@ -138,7 +138,7 @@ export default function LoanCreateForm() {
               type="number"
               {...register('interestRate', { required: true })}
               autoComplete="interestRate"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
             {errors.interestRate?.type === 'required' && (
               <TextError>A Interest Rate is required</TextError>
@@ -149,7 +149,7 @@ export default function LoanCreateForm() {
         <div className="sm:col-span-3">
           <label
             htmlFor="repaymentHeightLength"
-            className="block text-sm font-medium text-green-700"
+            className="block text-sm font-medium text-green-500"
           >
             Repayment Length
           </label>
@@ -158,7 +158,7 @@ export default function LoanCreateForm() {
               type="number"
               {...register('repaymentHeightLength', { required: true })}
               autoComplete="Repayment Length"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
             {errors.repaymentHeightLength?.type === 'required' && (
               <TextError>A Repayment Length is required</TextError>
@@ -169,7 +169,7 @@ export default function LoanCreateForm() {
       <div className="mt-6">
         <button
           type="submit"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Create Loan
         </button>

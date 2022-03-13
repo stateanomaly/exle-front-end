@@ -269,7 +269,7 @@ export default function Loan({ loanData }) {
                 <div className="py-5">
                   <a
                     id="applicant-information-title"
-                    className="text-lg leading-6 font-medium text-green-700 hover:text-green-800"
+                    className="text-lg font-medium text-green-700 hover:text-green-800"
                     href={getExplorerAddressUri(borrowerPk)}
                     style={{ overflowWrap: 'anywhere' }}
                   >
