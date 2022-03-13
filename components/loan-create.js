@@ -1,13 +1,19 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import TextError from 'components/text-error'
 import axios from 'axios'
+import Checkbox from './check-box'
+import { createLoanTermsOfUse } from '../helper/terms-of-use'
+import { currentHeight } from '../helper/explorer'
 
 export default function LoanCreateForm() {
+  const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm()
+
   const onSubmit = data => {
     axios
       .post('/api/create', data, {
@@ -21,6 +27,65 @@ export default function LoanCreateForm() {
         }
       })
   }
+
+  const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
+    return (
+      <section
+        aria-labelledby="timeline-title"
+        className="lg:col-start-3 lg:col-span-1"
+      >
+        <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+          {/* Activity Feed */}
+          <div className="flow-root">
+            <h3
+              id="timeline-title"
+              className="text-md font-medium text-gray-900"
+            >
+              Terms of Use
+            </h3>
+            <ul role="list">
+              {createLoanTermsOfUse.map(item => (
+                <li key={item.id} className="mt-1">
+                  <p className="text-xs text-gray-500">- {item.content} </p>
+                </li>
+              ))}
+            </ul>
+            <div className="relative flex items-start mt-3 align-middle">
+              <div className="flex items-center h-5">
+                <input
+                  id="offers"
+                  aria-describedby="offers-description"
+                  name="offers"
+                  type="checkbox"
+                  className="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded"
+                  checked={isTermsOfUseChecked}
+                  onChange={e => {
+                    setIsTermsOfUseChecked(e.target.checked)
+                  }}
+                />
+              </div>
+              <div className="ml-3 text-xs font-bold flex align-middle">
+                <span id="offers-description" className="text-gray-500">
+                  I agree to the terms of use
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="mt-6 flex w-full justify-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-900 disabled:text-gray-300 uppercase"
+              disabled={!isTermsOfUseChecked}
+              onClick={() => {
+                console.log('dance')
+              }}
+            >
+              Create Loan
+            </button>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="sm:col-span-4 mb-4">
@@ -167,12 +232,9 @@ export default function LoanCreateForm() {
         </div>
       </div>
       <div className="mt-6">
-        <button
-          type="submit"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Create Loan
-        </button>
+        <div className="flex flex-row">
+          {getFundingDetails(isTermsOfUseChecked, setIsTermsOfUseChecked)}
+        </div>
       </div>
     </form>
   )

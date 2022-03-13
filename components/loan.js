@@ -2,39 +2,13 @@ import { useState } from 'react'
 import { CheckIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
 import MiddleEllipsis from 'react-middle-ellipsis'
 import { getExplorerAddressUri } from '../helper/explorer-helper'
+import { fundingTermsOfUse } from '../helper/terms-of-use'
 
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
   advanced: { icon: ThumbUpIcon, bgColorClass: 'bg-blue-500' },
   completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' }
 }
-
-const termsOfUse = [
-  {
-    id: 1,
-    content:
-      'Creating or participating in raffles and receiving donations is not illegal in your country.'
-  },
-  {
-    id: 2,
-    content:
-      'You are over the legal age required to use financial services such as running raffles and are not creating a raffle on behalf of an underage person or anyone who is not legally allowed to create raffles.'
-  },
-  {
-    id: 3,
-    content:
-      'You are solely responsible for all legal or moral obligations and liabilities, and the service does not have any obligations or liabilities.'
-  },
-  {
-    id: 4,
-    content:
-      'You understand that there is a risk that the loan is not repaid and ErgoLend is not liable to any of the loss incurred.'
-  },
-  {
-    id: 5,
-    content: 'You are solely responsible for any due taxes and legal reports.'
-  }
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -186,7 +160,6 @@ const getRepaymentDetails = loanData => {
 }
 
 const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
-  console.log(isTermsOfUseChecked)
   return (
     <section
       aria-labelledby="timeline-title"
@@ -203,7 +176,7 @@ const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
             Terms of Use
           </h3>
           <ul role="list">
-            {termsOfUse.map(item => (
+            {fundingTermsOfUse.map(item => (
               <li key={item.id} className="mt-1">
                 <p className="text-xs text-gray-500">- {item.content} </p>
               </li>

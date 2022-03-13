@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coinbarn/ergo-ts": "0.3.0",
+    "@emotion/react": "11.8.2",
+    "@emotion/styled": "11.8.1",
     "@ergolabs/ergo-sdk": "^0.1.14",
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
+    "@mui/material": "5.5.0",
     "@tailwindcss/forms": "^0.3.4",
     "axios": "^0.22.0",
     "lodash": "^4.17.21",
