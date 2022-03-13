@@ -91,7 +91,13 @@ export default function LoanCard({ loan }) {
     }
 
     return (
-      <div className={styleClass} style={{ overflowWrap: 'anywhere' }}>
+      <div
+        className={styleClass}
+        style={{
+          overflowWrap: 'anywhere',
+          whiteSpace: 'pre-wrap'
+        }}
+      >
         {title}: {description}
       </div>
     )
