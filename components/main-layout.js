@@ -85,8 +85,8 @@ export default function MainLayout({ children, showCreate = true }) {
         </button>
       )
     } else {
-      let frontWalletString = ergoWalletAddress.slice(0, 5)
-      let endWalletString = ergoWalletAddress.slice(-4)
+      let frontWalletString = ergoWalletAddress.slice(0, 4)
+      let endWalletString = ergoWalletAddress.slice(-5)
       let compiledWalletString = frontWalletString + '...' + endWalletString
       return (
         <button
