@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import TextError from 'components/text-error'
 import axios from 'axios'
 import Checkbox from './check-box'
 import { createLoanTermsOfUse } from '../helper/terms-of-use'
 import { currentHeight } from '../helper/explorer'
+import { WalletContext } from '../context/wallet'
 
 export default function LoanCreateForm() {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
@@ -13,19 +14,21 @@ export default function LoanCreateForm() {
     handleSubmit,
     formState: { errors }
   } = useForm()
+  const wallet = useContext(WalletContext)
 
   const onSubmit = data => {
-    axios
-      .post('/api/create', data, {
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => {
-        const submitIsSuccessful = res.data.ok
-
-        if (submitIsSuccessful) {
-          Router.push('/')
-        }
-      })
+    console.log(data)
+    // axios
+    //   .post('/api/lend/create', data, {
+    //     headers: { 'Content-Type': 'application/json' }
+    //   })
+    //   .then(res => {
+    //     const submitIsSuccessful = res.data.ok
+    //
+    //     if (submitIsSuccessful) {
+    //       Router.push('/')
+    //     }
+    //   })
   }
 
   const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
@@ -71,12 +74,9 @@ export default function LoanCreateForm() {
               </div>
             </div>
             <button
-              type="button"
+              type="submit"
               className="mt-6 flex w-full justify-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-900 disabled:text-gray-300 uppercase"
               disabled={!isTermsOfUseChecked}
-              onClick={() => {
-                console.log('dance')
-              }}
             >
               Create Loan
             </button>
@@ -141,6 +141,7 @@ export default function LoanCreateForm() {
         <div className="mt-1">
           <input
             {...register('walletAddress', { required: true })}
+            defaultValue={wallet}
             type="text"
             autoComplete="Wallet Address"
             className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
