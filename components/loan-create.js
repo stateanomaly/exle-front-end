@@ -186,7 +186,7 @@ export default function LoanCreateForm() {
           <div className="mt-1">
             <input
               type="number"
-              {...register('deadline', { required: true })}
+              {...register('deadlineHeight', { required: true })}
               autoComplete="Deadline"
               className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
@@ -225,7 +225,7 @@ export default function LoanCreateForm() {
           <div className="mt-1">
             <input
               type="number"
-              {...register('repaymentHeightLength', { required: true })}
+              {...register('repaymentHeight', { required: true })}
               autoComplete="Repayment Length"
               className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
