@@ -54,8 +54,8 @@ export default function MainLayout({ children, showCreate = true }) {
       ergo.get_used_addresses().then(data => {
         setErgoWalletAddress(data[0])
         localStorage.setItem('ergoWalletAddress', data[0])
-        setLoadingWallet(false)
       })
+      setLoadingWallet(false)
     })
   }
 

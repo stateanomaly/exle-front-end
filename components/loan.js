@@ -3,6 +3,7 @@ import { CheckIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
 import MiddleEllipsis from 'react-middle-ellipsis'
 import { getExplorerAddressUri } from '../helper/explorer-helper'
 import { fundingTermsOfUse } from '../helper/terms-of-use'
+import { fundLoanApi, fundRepaymentApi } from '../config/path'
 
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
@@ -159,68 +160,95 @@ const getRepaymentDetails = loanData => {
   }
 }
 
-const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
-  return (
-    <section
-      aria-labelledby="timeline-title"
-      className="lg:col-start-3 lg:col-span-1"
-    >
-      <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-        <h2 id="timeline-title" className="text-lg font-medium text-gray-900">
-          Funding Details
-        </h2>
-
-        {/* Activity Feed */}
-        <div className="mt-6 flow-root">
-          <h3 id="timeline-title" className="text-md font-medium text-gray-900">
-            Terms of Use
-          </h3>
-          <ul role="list">
-            {fundingTermsOfUse.map(item => (
-              <li key={item.id} className="mt-1">
-                <p className="text-xs text-gray-500">- {item.content} </p>
-              </li>
-            ))}
-          </ul>
-          <div className="relative flex items-start mt-3 align-middle">
-            <div className="flex items-center h-5">
-              <input
-                id="offers"
-                aria-describedby="offers-description"
-                name="offers"
-                type="checkbox"
-                className="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded"
-                checked={isTermsOfUseChecked}
-                onChange={e => {
-                  setIsTermsOfUseChecked(e.target.checked)
-                }}
-              />
-            </div>
-            <div className="ml-3 text-xs font-bold flex align-middle">
-              <span id="offers-description" className="text-gray-500">
-                I agree to the terms of use
-              </span>
-            </div>
-          </div>
-          <button
-            type="button"
-            className="mt-6 flex w-full justify-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-900 disabled:text-gray-300 uppercase"
-            disabled={!isTermsOfUseChecked}
-            onClick={() => {
-              console.log('dance')
-            }}
-          >
-            Fund this loan
-          </button>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 export default function Loan({ loanData }) {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
   const { name, description, borrowerPk, boxState } = loanData
+
+  const fundLoan = async () => {
+    var apiUrl
+    if (loanData.boxState === repayment) {
+      apiUrl = mockFundRepaymentApi
+    } else {
+      apiUrl = mockFundLoanApi
+    }
+
+    await axios
+      .post(
+        apiUrl,
+        {},
+        {
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+      .then(res => {
+        const submitIsSuccessful = res.data.ok
+
+        if (submitIsSuccessful) {
+          Router.push('/')
+        }
+      })
+  }
+
+  const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
+    return (
+      <section
+        aria-labelledby="timeline-title"
+        className="lg:col-start-3 lg:col-span-1"
+      >
+        <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+          <h2 id="timeline-title" className="text-lg font-medium text-gray-900">
+            Funding Details
+          </h2>
+
+          {/* Activity Feed */}
+          <div className="mt-6 flow-root">
+            <h3
+              id="timeline-title"
+              className="text-md font-medium text-gray-900"
+            >
+              Terms of Use
+            </h3>
+            <ul role="list">
+              {fundingTermsOfUse.map(item => (
+                <li key={item.id} className="mt-1">
+                  <p className="text-xs text-gray-500">- {item.content} </p>
+                </li>
+              ))}
+            </ul>
+            <div className="relative flex items-start mt-3 align-middle">
+              <div className="flex items-center h-5">
+                <input
+                  id="offers"
+                  aria-describedby="offers-description"
+                  name="offers"
+                  type="checkbox"
+                  className="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded"
+                  checked={isTermsOfUseChecked}
+                  onChange={e => {
+                    setIsTermsOfUseChecked(e.target.checked)
+                  }}
+                />
+              </div>
+              <div className="ml-3 text-xs font-bold flex align-middle">
+                <span id="offers-description" className="text-gray-500">
+                  I agree to the terms of use
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="mt-6 flex w-full justify-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-900 disabled:text-gray-300 uppercase"
+              disabled={!isTermsOfUseChecked}
+              onClick={fundLoan}
+            >
+              Fund this loan
+            </button>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <div className="relative bg-gray-900 sm:rounded-lg my-4">
       <main className="py-6">

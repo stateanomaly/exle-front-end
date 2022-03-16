@@ -6,6 +6,7 @@ import Checkbox from './check-box'
 import { createLoanTermsOfUse } from '../helper/terms-of-use'
 import { currentHeight } from '../helper/explorer'
 import { WalletContext } from '../context/wallet'
+import { createLoanApi, mockCreateLoanApi } from '../config/path'
 
 export default function LoanCreateForm() {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
@@ -16,19 +17,21 @@ export default function LoanCreateForm() {
   } = useForm()
   const wallet = useContext(WalletContext)
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log(data)
-    // axios
-    //   .post('/api/lend/create', data, {
-    //     headers: { 'Content-Type': 'application/json' }
-    //   })
-    //   .then(res => {
-    //     const submitIsSuccessful = res.data.ok
-    //
-    //     if (submitIsSuccessful) {
-    //       Router.push('/')
-    //     }
-    //   })
+    console.log(mockCreateLoanApi)
+    await axios
+      .post(mockCreateLoanApi, data, {
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => {
+        console.log(res)
+        const submitIsSuccessful = res.data.ok
+
+        if (submitIsSuccessful) {
+          Router.push('/')
+        }
+      })
   }
 
   const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
