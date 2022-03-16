@@ -1,4 +1,4 @@
-const backendUri = 'https://ergo-lend.herokuapp.com/'
+const backendUri = 'https://ergo-lend.herokuapp.com'
 
 export const lendApi = backendUri + '/api/lend'
 export const getLoansApi = lendApi
