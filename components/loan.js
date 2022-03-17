@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { CheckIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
 import MiddleEllipsis from 'react-middle-ellipsis'
 import { getExplorerAddressUri } from '../helper/explorer-helper'
 import { fundingTermsOfUse } from '../helper/terms-of-use'
-import { fundLoanApi, fundRepaymentApi } from '../config/path'
+import {
+  fundLoanApi,
+  fullyFundRepaymentApi,
+  mockFundLoanApi,
+  mockFullyFundRepaymentApi
+} from '../config/path'
+import { WalletContext } from '../context/wallet'
+import Popup from './popup'
 
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
@@ -162,31 +169,45 @@ const getRepaymentDetails = loanData => {
 
 export default function Loan({ loanData }) {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
+  const [popup, setPopup] = useState({})
+  const [feedback, setFeedback] = useState(false)
   const { name, description, borrowerPk, boxState } = loanData
+  const wallet = useContext(WalletContext)
 
   const fundLoan = async () => {
     var apiUrl
     if (loanData.boxState === repayment) {
-      apiUrl = mockFundRepaymentApi
+      apiUrl = mockFullyFundRepaymentApi
     } else {
       apiUrl = mockFundLoanApi
     }
 
+    var body = {}
+    body.walletAddress = wallet
+    body.boxId = loanData.boxId
+
     await axios
-      .post(
-        apiUrl,
-        {},
-        {
-          headers: { 'Content-Type': 'application/json' }
-        }
-      )
+      .post(apiUrl, body, {
+        headers: { 'Content-Type': 'application/json' }
+      })
       .then(res => {
+        console.log(res)
         const submitIsSuccessful = res.data.ok
+        const response = res.data
+        setPopup(response)
+        setFeedback(true)
 
         if (submitIsSuccessful) {
           Router.push('/')
         }
       })
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setFeedback(false)
   }
 
   const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
@@ -288,6 +309,13 @@ export default function Loan({ loanData }) {
             </section>
           </div>
           {getFundingDetails(isTermsOfUseChecked, setIsTermsOfUseChecked)}
+          <Popup
+            deadline={popup.deadline}
+            erg={popup.fee}
+            address={popup.address || ''}
+            open={feedback}
+            onClose={handleClose}
+          />
         </div>
       </main>
     </div>

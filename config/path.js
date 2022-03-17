@@ -12,6 +12,7 @@ export const getRepaymentsApi = repaymentApi
 export const fundRepaymentApi = repaymentApi + '/fund'
 export const fullyFundRepaymentApi = repaymentApi + '/fullFund'
 export const mockFundRepaymentApi = repaymentApi + '/mockFund'
+export const mockFullyFundRepaymentApi = repaymentApi + '/mockFullFund'
 
 export const explorerAddressUri =
   'https://explorer.ergoplatform.com/en/addresses/'
