@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "proxy": "https://ergo-lend.herokuapp.com/",
   "dependencies": {
     "@coinbarn/ergo-ts": "0.3.0",
     "@emotion/react": "11.8.2",
@@ -15,6 +16,8 @@
     "@ergolabs/ergo-sdk": "^0.1.14",
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
+    "@material-ui/core": "4.12.3",
+    "@material-ui/lab": "4.0.0-alpha.60",
     "@mui/material": "5.5.0",
     "@tailwindcss/forms": "^0.3.4",
     "axios": "^0.22.0",
@@ -22,6 +25,8 @@
     "lodash": "^4.17.21",
     "next": "11.1.2",
     "react": "17.0.2",
+    "react-copy-to-clipboard": "5.0.4",
+    "react-countdown-circle-timer": "3.0.9",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.17.2",
     "react-middle-ellipsis": "^1.2.1",

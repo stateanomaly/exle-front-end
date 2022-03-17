@@ -6,3 +6,20 @@ export const ergsToNanoErgs = erg => {
 export const nanoErgsToErgs = nanoErgs => {
   return nanoErgs / OneErg
 }
+
+// Ergo-Raffle
+const deadlineString = (deadline, currentHeight) => {
+  if (deadline > currentHeight && deadline - currentHeight < 30)
+    return `Block ${deadline}, about ${(deadline - currentHeight) * 2} minutes`
+  else if (deadline > currentHeight && deadline - currentHeight < 60)
+    return `Block ${deadline}, about an hour`
+  else if (deadline > currentHeight && deadline - currentHeight < 720)
+    return `Block ${deadline}, about ${Math.round(
+      (deadline - currentHeight) / 30
+    )} hours`
+  else if (deadline > currentHeight)
+    return `Block ${deadline}, about ${Math.round(
+      (deadline - currentHeight) / 720
+    )} days`
+  else return `Ended`
+}

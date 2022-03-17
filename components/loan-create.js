@@ -7,9 +7,12 @@ import { createLoanTermsOfUse } from '../helper/terms-of-use'
 import { currentHeight } from '../helper/explorer'
 import { WalletContext } from '../context/wallet'
 import { createLoanApi, mockCreateLoanApi } from '../config/path'
+import Popup from './popup'
 
 export default function LoanCreateForm() {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
+  const [popup, setPopup] = useState({})
+  const [feedback, setFeedback] = useState(false)
   const {
     register,
     handleSubmit,
@@ -19,19 +22,34 @@ export default function LoanCreateForm() {
 
   const onSubmit = async data => {
     console.log(data)
-    console.log(mockCreateLoanApi)
+    console.log(createLoanApi)
+
     await axios
-      .post(mockCreateLoanApi, data, {
+      .post(createLoanApi, data, {
         headers: { 'Content-Type': 'application/json' }
       })
       .then(res => {
         console.log(res)
         const submitIsSuccessful = res.data.ok
+        const response = res.data
+        setPopup(response)
+        setFeedback(true)
 
-        if (submitIsSuccessful) {
-          Router.push('/')
-        }
+        // if (submitIsSuccessful) {
+        //   Router.push('/')
+        // }
       })
+      .catch(error => {
+        const response = error.response
+        throw error
+      })
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setFeedback(false)
   }
 
   const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
@@ -238,6 +256,13 @@ export default function LoanCreateForm() {
       <div className="mt-6">
         <div className="flex flex-row">
           {getFundingDetails(isTermsOfUseChecked, setIsTermsOfUseChecked)}
+          <Popup
+            deadline={popup.deadline}
+            erg={popup.fee}
+            address={popup.address || ''}
+            open={feedback}
+            onClose={handleClose}
+          />
         </div>
       </div>
     </form>
