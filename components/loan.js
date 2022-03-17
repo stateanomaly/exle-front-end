@@ -3,6 +3,7 @@ import { CheckIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
 import MiddleEllipsis from 'react-middle-ellipsis'
 import { getExplorerAddressUri } from '../helper/explorer-helper'
 import { fundingTermsOfUse } from '../helper/terms-of-use'
+import axios from 'axios'
 import {
   fundLoanApi,
   fullyFundRepaymentApi,
