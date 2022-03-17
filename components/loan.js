@@ -176,7 +176,7 @@ export default function Loan({ loanData }) {
 
   const fundLoan = async () => {
     var apiUrl
-    if (loanData.boxState === repayment) {
+    if (loanData.boxState.toLowerCase === 'repayment') {
       apiUrl = mockFullyFundRepaymentApi
     } else {
       apiUrl = mockFundLoanApi
