@@ -7,12 +7,13 @@ import { createLoanTermsOfUse } from '../helper/terms-of-use'
 import { currentHeight } from '../helper/explorer'
 import { WalletContext } from '../context/wallet'
 import { createLoanApi, mockCreateLoanApi } from '../config/path'
-import Popup from './popup'
+import { Popup, Button } from './generic'
 
 export default function LoanCreateForm() {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
   const [popup, setPopup] = useState({})
   const [feedback, setFeedback] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -23,6 +24,7 @@ export default function LoanCreateForm() {
   const onSubmit = async data => {
     console.log(data)
     console.log(createLoanApi)
+    setIsLoading(true)
 
     await axios
       .post(createLoanApi, data, {
@@ -34,6 +36,7 @@ export default function LoanCreateForm() {
         const response = res.data
         setPopup(response)
         setFeedback(true)
+        setIsLoading(false)
 
         // if (submitIsSuccessful) {
         //   Router.push('/')
@@ -41,8 +44,10 @@ export default function LoanCreateForm() {
       })
       .catch(error => {
         const response = error.response
+        setIsLoading(false)
         throw error
       })
+    setIsLoading(false)
   }
 
   const handleClose = (event, reason) => {
@@ -94,13 +99,14 @@ export default function LoanCreateForm() {
                 </span>
               </div>
             </div>
-            <button
+            <Button
               type="submit"
               className="mt-6 flex w-full justify-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-900 disabled:text-gray-300 uppercase"
               disabled={!isTermsOfUseChecked}
+              loading={isLoading}
             >
               Create Loan
-            </button>
+            </Button>
           </div>
         </div>
       </section>

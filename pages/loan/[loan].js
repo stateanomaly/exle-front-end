@@ -37,14 +37,14 @@ export default function PageLoan({ loan }) {
 
 export const getServerSideProps = async ({ query, params }) => {
   const loan = await fetchLoan(params.loan)
-  if (!loan) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
-  }
+  // if (!loan) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false
+  //     }
+  //   }
+  // }
 
   return {
     props: {

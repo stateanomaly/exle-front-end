@@ -1,17 +1,25 @@
 import { useState, useContext } from 'react'
 import { CheckIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
 import MiddleEllipsis from 'react-middle-ellipsis'
+import {
+  ButtonGroup,
+  Button as MUIButton,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment
+} from '@mui/material'
 import { getExplorerAddressUri } from '../helper/explorer-helper'
 import { fundingTermsOfUse } from '../helper/terms-of-use'
+import { nanoErgsToErgs, ergsToNanoErgs } from '../helper/erg-converter'
 import axios from 'axios'
 import {
   fundLoanApi,
-  fullyFundRepaymentApi,
-  mockFundLoanApi,
-  mockFullyFundRepaymentApi
+  fundRepaymentApi,
+  fullyFundRepaymentApi
 } from '../config/path'
 import { WalletContext } from '../context/wallet'
-import Popup from './popup'
+import { Button, Popup } from './generic'
 
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
@@ -172,20 +180,34 @@ export default function Loan({ loanData }) {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
   const [popup, setPopup] = useState({})
   const [feedback, setFeedback] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [fundingAmount, setFundingAmount] = useState()
   const { name, description, borrowerPk, boxState } = loanData
   const wallet = useContext(WalletContext)
 
   const fundLoan = async () => {
-    var apiUrl
-    if (loanData.boxState.toLowerCase === 'repayment') {
-      apiUrl = mockFullyFundRepaymentApi
-    } else {
-      apiUrl = mockFundLoanApi
-    }
-
+    console.log(loanData)
     var body = {}
     body.walletAddress = wallet
-    body.boxId = loanData.boxId
+    body.boxId = loanData.id
+
+    var apiUrl
+    if (loanData.boxState.toLowerCase() === 'repayment') {
+      if (fundingAmount === getFundingLeft()) {
+        console.log('ping')
+        apiUrl = fullyFundRepaymentApi
+      } else {
+        console.log('pong')
+        apiUrl = fundRepaymentApi
+        body.fundAmount = ergsToNanoErgs(fundingAmount)
+      }
+    } else {
+      apiUrl = fundLoanApi
+    }
+    setIsLoading(true)
+
+    console.log(apiUrl)
+    console.log(body)
 
     await axios
       .post(apiUrl, body, {
@@ -195,12 +217,16 @@ export default function Loan({ loanData }) {
         console.log(res)
         const submitIsSuccessful = res.data.ok
         const response = res.data
+        setIsLoading(false)
         setPopup(response)
         setFeedback(true)
 
         if (submitIsSuccessful) {
           Router.push('/')
         }
+      })
+      .catch(error => {
+        setIsLoading(false)
       })
   }
 
@@ -209,6 +235,92 @@ export default function Loan({ loanData }) {
       return
     }
     setFeedback(false)
+  }
+
+  const getFundingLeft = () => {
+    var totalValue =
+      boxState.toLowerCase() === 'repayment'
+        ? loanData.repaymentAmountInNanoErgs
+        : loanData.fundingGoal
+
+    var boxValue = loanData.value
+    var defaultBoxValue = 1000000
+    var valueLeft = totalValue - boxValue + defaultBoxValue
+
+    return nanoErgsToErgs(valueLeft)
+  }
+
+  const getFundingLeftTitle = () => {
+    if (boxState.toLowerCase() === 'repayment') {
+      return 'Total Repayment Amount Left'
+    } else {
+      ;('Total Funding Amount')
+    }
+  }
+
+  const repaySplitAmount = () => {
+    if (boxState.toLowerCase() === 'repayment') {
+      return (
+        <div className="mt-2 flow-root">
+          <h4 id="timeline-title" className="text-md font-medium text-gray-900">
+            Repayment Calculator
+          </h4>
+          <div>
+            <label
+              htmlFor="price"
+              className="block text-sm font-medium text-gray-700 mt-2"
+            >
+              Amount
+            </label>
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span className="text-gray-500 sm:text-sm"> Σ </span>
+              </div>
+              <input
+                type="text"
+                name="price"
+                id="price"
+                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                placeholder="0.00"
+                defaultValue={fundingAmount}
+              />
+              <div className="absolute inset-y-0 right-0 flex items-center">
+                <label htmlFor="currency" className="sr-only">
+                  Currency
+                </label>
+                <select
+                  id="currency"
+                  name="currency"
+                  className="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+                >
+                  <option>ERG</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <ButtonGroup
+            variant="outlined"
+            aria-label="outlined button group"
+            fullWidth={true}
+          >
+            <MUIButton onClick={() => setFundingAmount(getFundingLeft() * 0.1)}>
+              1/10
+            </MUIButton>
+            <MUIButton
+              onClick={() => setFundingAmount(getFundingLeft() * 0.25)}
+            >
+              1/4
+            </MUIButton>
+            <MUIButton onClick={() => setFundingAmount(getFundingLeft() * 0.5)}>
+              1/2
+            </MUIButton>
+            <MUIButton onClick={() => setFundingAmount(getFundingLeft())}>
+              full
+            </MUIButton>
+          </ButtonGroup>
+        </div>
+      )
+    }
   }
 
   const getFundingDetails = (isTermsOfUseChecked, setIsTermsOfUseChecked) => {
@@ -222,8 +334,18 @@ export default function Loan({ loanData }) {
             Funding Details
           </h2>
 
-          {/* Activity Feed */}
           <div className="mt-6 flow-root">
+            <h4
+              id="timeline-title"
+              className="text-md font-medium text-gray-900"
+            >
+              {getFundingLeftTitle()}
+            </h4>
+            <p className="text-s text-gray-500">{getFundingLeft()} Ergs</p>
+          </div>
+          {repaySplitAmount()}
+          {/* Activity Feed */}
+          <div className="mt-3 flow-root">
             <h3
               id="timeline-title"
               className="text-md font-medium text-gray-900"
@@ -257,14 +379,15 @@ export default function Loan({ loanData }) {
                 </span>
               </div>
             </div>
-            <button
+            <Button
               type="button"
               className="mt-6 flex w-full justify-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-900 disabled:text-gray-300 uppercase"
               disabled={!isTermsOfUseChecked}
               onClick={fundLoan}
+              loading={isLoading}
             >
               Fund this loan
-            </button>
+            </Button>
           </div>
         </div>
       </section>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ergoBoxFromProxy, RustModule } from '@ergolabs/ergo-sdk'
 import { WalletContext } from '../context/wallet'
 import Cookies from 'js-cookie'
+import { Heading } from './generic'
 
 import { Disclosure } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
@@ -239,11 +240,7 @@ export default function MainLayout({ children, showCreate = true }) {
           </Disclosure>
           <header className="py-10">
             <div className="max-w-7xl mx-auto px-4 mb-8 sm:px-6 lg:px-8 md:flex">
-              <h1 className="text-3xl font-bold text-white md:flex-grow">
-                This site is under construction! Reach out to our discord if you
-                see any issues or if you enjoy watching the construction. Use at
-                your own risk
-              </h1>
+              <Heading>Site Under Construction</Heading>
             </div>
           </header>
         </div>
