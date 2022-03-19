@@ -10,7 +10,6 @@ export default function Checkbox({ children, isChecked, setIsChecked }) {
           className="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded"
           checked={isChecked}
           onChange={e => {
-            console.log(setIsChecked)
             setIsChecked(e.target.checked)
           }}
         />

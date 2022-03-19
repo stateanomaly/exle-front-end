@@ -18,7 +18,6 @@ const fetchData = async api =>
 
 const fetchLoan = async loanId => {
   const loanApi = `https://ergo-lend.herokuapp.com/api/lend/${loanId}`
-  console.log(loanApi)
   return fetchData(loanApi)
 }
 

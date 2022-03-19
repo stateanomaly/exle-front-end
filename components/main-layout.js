@@ -49,7 +49,6 @@ export default function MainLayout({ children, showCreate = true }) {
       //   .get_utxos()
       //   .then(bs => bs?.map(b => ergoBoxFromProxy(b)))
       //   .then(data => {
-      //     console.log(data)
       //   })
       setLoadingWallet(true)
       ergo.get_used_addresses().then(data => {
@@ -240,7 +239,7 @@ export default function MainLayout({ children, showCreate = true }) {
           </Disclosure>
           <header className="py-10">
             <div className="max-w-7xl mx-auto px-4 mb-8 sm:px-6 lg:px-8 md:flex">
-              <Heading>Site Under Construction</Heading>
+              <Heading>Site under construction</Heading>
             </div>
           </header>
         </div>

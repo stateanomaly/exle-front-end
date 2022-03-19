@@ -17,3 +17,36 @@ export const mockFullyFundRepaymentApi = repaymentApi + '/mockFullFund'
 
 export const explorerAddressUri =
   'https://explorer.ergoplatform.com/en/addresses/'
+
+const mock = false
+export const getCreateLoanApi = () => {
+  if (mock) {
+    return mockCreateLoanApi
+  } else {
+    return createLoanApi
+  }
+}
+
+export const getFundLoanApi = () => {
+  if (mock) {
+    return mockFundLoanApi
+  } else {
+    return fundLoanApi
+  }
+}
+
+export const getFundRepaymentApi = () => {
+  if (mock) {
+    return mockFundRepaymentApi
+  } else {
+    return fundRepaymentApi
+  }
+}
+
+export const getFullyFundRepaymentApi = () => {
+  if (mock) {
+    return mockFullyFundRepaymentApi
+  } else {
+    return fullyFundRepaymentApi
+  }
+}

@@ -14,9 +14,9 @@ import { fundingTermsOfUse } from '../helper/terms-of-use'
 import { nanoErgsToErgs, ergsToNanoErgs } from '../helper/erg-converter'
 import axios from 'axios'
 import {
-  fundLoanApi,
-  fundRepaymentApi,
-  fullyFundRepaymentApi
+  getFundLoanApi,
+  getFundRepaymentApi,
+  getFullyFundRepaymentApi
 } from '../config/path'
 import { WalletContext } from '../context/wallet'
 import { Button, Popup } from './generic'
@@ -186,7 +186,6 @@ export default function Loan({ loanData }) {
   const wallet = useContext(WalletContext)
 
   const fundLoan = async () => {
-    console.log(loanData)
     var body = {}
     body.walletAddress = wallet
     body.boxId = loanData.id
@@ -194,27 +193,21 @@ export default function Loan({ loanData }) {
     var apiUrl
     if (loanData.boxState.toLowerCase() === 'repayment') {
       if (fundingAmount === getFundingLeft()) {
-        console.log('ping')
-        apiUrl = fullyFundRepaymentApi
+        apiUrl = getFullyFundRepaymentApi()
       } else {
-        console.log('pong')
-        apiUrl = fundRepaymentApi
+        apiUrl = getFundRepaymentApi()
         body.fundAmount = ergsToNanoErgs(fundingAmount)
       }
     } else {
-      apiUrl = fundLoanApi
+      apiUrl = getFundLoanApi()
     }
     setIsLoading(true)
-
-    console.log(apiUrl)
-    console.log(body)
 
     await axios
       .post(apiUrl, body, {
         headers: { 'Content-Type': 'application/json' }
       })
       .then(res => {
-        console.log(res)
         const submitIsSuccessful = res.data.ok
         const response = res.data
         setIsLoading(false)

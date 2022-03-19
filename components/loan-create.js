@@ -6,7 +6,7 @@ import Checkbox from './check-box'
 import { createLoanTermsOfUse } from '../helper/terms-of-use'
 import { currentHeight } from '../helper/explorer'
 import { WalletContext } from '../context/wallet'
-import { createLoanApi, mockCreateLoanApi } from '../config/path'
+import { getCreateLoanApi } from '../config/path'
 import { Popup, Button } from './generic'
 
 export default function LoanCreateForm() {
@@ -22,16 +22,15 @@ export default function LoanCreateForm() {
   const wallet = useContext(WalletContext)
 
   const onSubmit = async data => {
-    console.log(data)
-    console.log(createLoanApi)
     setIsLoading(true)
+
+    var createLoanApi = getCreateLoanApi()
 
     await axios
       .post(createLoanApi, data, {
         headers: { 'Content-Type': 'application/json' }
       })
       .then(res => {
-        console.log(res)
         const submitIsSuccessful = res.data.ok
         const response = res.data
         setPopup(response)
@@ -114,163 +113,205 @@ export default function LoanCreateForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="sm:col-span-4 mb-4">
-        <label
-          htmlFor="name"
-          className="block text-md font-medium text-green-500"
-        >
-          Name
-        </label>
-        <div className="mt-1">
-          <input
-            {...register('name', { required: true })}
-            type="text"
-            autoComplete="Name of Loan"
-            className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
-          />
-          {errors.name?.type === 'required' && (
-            <TextError>A Name is required</TextError>
-          )}
-        </div>
-      </div>
-
-      <div className="sm:col-span-6 mb-4">
-        <label
-          htmlFor="description"
-          className="block text-sm font-medium text-green-500"
-        >
-          Description
-        </label>
-        <div className="mt-1">
-          <textarea
-            {...register('description', { required: true })}
-            rows={3}
-            className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
-            defaultValue={''}
-          />
-          {errors.description?.type === 'required' && (
-            <TextError>A Description is required</TextError>
-          )}
-        </div>
-        <p className="mt-2 text-sm text-green-700">
-          Write a few sentences about what you intend to do with the loan.
+    <div>
+      <div className="py-5">
+        <h3 className="text-xl leading-6 font-medium text-green-300">
+          Create a Loan
+        </h3>
+        <p className="mt-1 text-sm text-gray-500">
+          Let&apos;s start from the basics
         </p>
       </div>
-
-      <div className="sm:col-span-4">
-        <label
-          htmlFor="walletAddress"
-          className="block text-sm font-medium text-green-500"
-        >
-          Wallet Address
-        </label>
-        <div className="mt-1">
-          <input
-            {...register('walletAddress', { required: true })}
-            defaultValue={wallet}
-            type="text"
-            autoComplete="Wallet Address"
-            className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
-          />
-          {errors.walletAddress?.type === 'required' && (
-            <TextError>A Wallet Address is required</TextError>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-        <div className="sm:col-span-3">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="sm:col-span-4 mb-4">
           <label
-            htmlFor="goal"
-            className="block text-sm font-medium text-green-500"
+            htmlFor="name"
+            className="block text-md font-medium text-green-500"
           >
-            Goal
+            Name
+            <p className="text-xs text-green-700">
+              What is the name of the project that the loan is for?
+            </p>
           </label>
           <div className="mt-1">
             <input
-              type="number"
-              {...register('goal', { required: true })}
-              autoComplete="goal"
+              {...register('name', { required: true })}
+              type="text"
+              autoComplete="Name of Loan"
               className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
-            {errors.goal?.type === 'required' && (
-              <TextError>A Goal is required</TextError>
+            {errors.name?.type === 'required' && (
+              <TextError>A Name is required</TextError>
             )}
           </div>
         </div>
 
-        <div className="sm:col-span-3">
+        <div className="sm:col-span-6 mb-4">
           <label
-            htmlFor="deadlineHeight"
-            className="block text-sm font-medium text-green-500"
+            htmlFor="description"
+            className="block text-md font-medium text-green-500"
           >
-            Deadline
+            Description
+            <p className="text-xs text-green-700">
+              What is the details of the project that this loan will be
+              supporting? Write a detailed description to keep loaner
+              well-informed
+            </p>
           </label>
           <div className="mt-1">
-            <input
-              type="number"
-              {...register('deadlineHeight', { required: true })}
-              autoComplete="Deadline"
+            <textarea
+              {...register('description', { required: true })}
+              rows={3}
               className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
+              defaultValue={''}
             />
-            {errors.deadline?.type === 'required' && (
-              <TextError>A Deadline is required</TextError>
-            )}
-          </div>
-        </div>
-        <div className="sm:col-span-3">
-          <label
-            htmlFor="interestRate"
-            className="block text-sm font-medium text-green-500"
-          >
-            Interest Rate
-          </label>
-          <div className="mt-1">
-            <input
-              type="number"
-              {...register('interestRate', { required: true })}
-              autoComplete="interestRate"
-              className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
-            />
-            {errors.interestRate?.type === 'required' && (
-              <TextError>A Interest Rate is required</TextError>
+            {errors.description?.type === 'required' && (
+              <TextError>A Description is required</TextError>
             )}
           </div>
         </div>
 
-        <div className="sm:col-span-3">
+        <div className="sm:col-span-4">
           <label
-            htmlFor="repaymentHeightLength"
-            className="block text-sm font-medium text-green-500"
+            htmlFor="walletAddress"
+            className="block text-md font-medium text-green-500"
           >
-            Repayment Length
+            Wallet Address
           </label>
+          <p className="text-xs text-green-700">
+            Wallet address of the borrower. This is where the loaned funds will
+            be sent to.
+          </p>
           <div className="mt-1">
             <input
-              type="number"
-              {...register('repaymentHeight', { required: true })}
-              autoComplete="Repayment Length"
+              {...register('walletAddress', { required: true })}
+              defaultValue={wallet}
+              type="text"
+              autoComplete="Wallet Address"
               className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
             />
-            {errors.repaymentHeightLength?.type === 'required' && (
-              <TextError>A Repayment Length is required</TextError>
+            {errors.walletAddress?.type === 'required' && (
+              <TextError>A Wallet Address is required</TextError>
             )}
           </div>
         </div>
-      </div>
-      <div className="mt-6">
-        <div className="flex flex-row">
-          {getFundingDetails(isTermsOfUseChecked, setIsTermsOfUseChecked)}
-          <Popup
-            deadline={popup.deadline}
-            erg={popup.fee}
-            address={popup.address || ''}
-            open={feedback}
-            onClose={handleClose}
-          />
+
+        <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="goal"
+              className="block text-md font-medium text-green-500"
+            >
+              Goal
+              <p className="text-xs text-green-700">
+                What is the goal amount for the loan
+              </p>
+            </label>
+            <div className="mt-1 relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span className="text-green-500 sm:text-sm"> Σ </span>
+              </div>
+              <input
+                {...register('goal', { required: true })}
+                type="number"
+                autoComplete="goal"
+                className="appearance-none pl-7 block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
+                min="0"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="deadlineHeight"
+              className="block text-md font-medium text-green-500"
+            >
+              Funding Deadline
+              <p className="text-xs text-green-700">
+                When do you expect the goal to be funded by?
+              </p>
+            </label>
+            <div className="mt-1">
+              <input
+                type="number"
+                {...register('deadlineHeight', { required: true })}
+                autoComplete="Deadline"
+                className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
+                min="1"
+                step="1"
+              />
+              {errors.deadline?.type === 'required' && (
+                <TextError>A Deadline is required</TextError>
+              )}
+            </div>
+          </div>
+
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="interestRate"
+              className="block text-md font-medium text-green-500"
+            >
+              Interest Rate
+              <p className="text-xs text-green-700">
+                What is the interest rate for this loan
+              </p>
+            </label>
+            <div className="mt-1 relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span className="text-green-500 sm:text-sm"> % </span>
+              </div>
+              <input
+                {...register('interestRate', { required: true })}
+                type="number"
+                autoComplete="interestRate"
+                className="pl-7 block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
+                placeholder="0.00"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="repaymentHeightLength"
+              className="block text-md font-medium text-green-500"
+            >
+              Repayment Length
+              <p className="text-xs text-green-700">
+                How long do you expect to repay this amount?
+              </p>
+            </label>
+            <div className="mt-1">
+              <input
+                type="number"
+                {...register('repaymentHeight', { required: true })}
+                autoComplete="Repayment Length"
+                className="block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
+                min="1"
+                step="1"
+              />
+              <p className="mt-2 text-sm text-red-600" id="email-error">
+                {errors.repaymentHeightLength?.type === 'required'
+                  ? 'A Repayment Length is required'
+                  : ''}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
+        <div className="mt-6">
+          <div className="flex flex-row">
+            {getFundingDetails(isTermsOfUseChecked, setIsTermsOfUseChecked)}
+            <Popup
+              deadline={popup.deadline}
+              erg={popup.fee}
+              address={popup.address || ''}
+              open={feedback}
+              onClose={handleClose}
+            />
+          </div>
+        </div>
+      </form>
+    </div>
   )
 }
