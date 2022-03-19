@@ -247,7 +247,7 @@ export default function Loan({ loanData }) {
     if (boxState.toLowerCase() === 'repayment') {
       return 'Total Repayment Amount Left'
     } else {
-      ;('Total Funding Amount')
+      return 'Total Funding Amount'
     }
   }
 
