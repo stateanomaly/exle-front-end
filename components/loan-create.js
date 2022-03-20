@@ -218,6 +218,7 @@ export default function LoanCreateForm() {
                 className="appearance-none pl-7 block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
                 min="0"
                 placeholder="0.00"
+                step="any"
               />
             </div>
           </div>
@@ -268,6 +269,7 @@ export default function LoanCreateForm() {
                 className="pl-7 block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
                 placeholder="0.00"
                 min="0"
+                step="any"
               />
             </div>
           </div>
