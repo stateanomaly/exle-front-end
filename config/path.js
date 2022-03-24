@@ -1,4 +1,5 @@
 const backendUri = 'https://ergo-lend.herokuapp.com'
+// const backendUri = 'http://localhost:9000'
 
 export const lendApi = backendUri + '/api/lend'
 export const getLoansApi = lendApi

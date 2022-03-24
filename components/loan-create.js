@@ -8,6 +8,7 @@ import { currentHeight } from '../helper/explorer'
 import { WalletContext } from '../context/wallet'
 import { getCreateLoanApi } from '../config/path'
 import { Popup, Button } from './generic'
+import { ergsToNanoErgs } from '../helper/erg-converter'
 
 export default function LoanCreateForm() {
   const [isTermsOfUseChecked, setIsTermsOfUseChecked] = useState(false)
@@ -25,6 +26,8 @@ export default function LoanCreateForm() {
     setIsLoading(true)
 
     var createLoanApi = getCreateLoanApi()
+    data.goal = ergsToNanoErgs(data.goal)
+    console.log(data)
 
     await axios
       .post(createLoanApi, data, {
@@ -267,9 +270,9 @@ export default function LoanCreateForm() {
                 type="number"
                 autoComplete="interestRate"
                 className="pl-7 block text-yellow-200 w-full border-0 border-b border-transparent bg-opacity-5 bg-green-200 focus:border-green-400 focus:ring-0 sm:text-sm"
-                placeholder="0.00"
+                placeholder="0"
                 min="0"
-                step="any"
+                step="1"
               />
             </div>
           </div>
