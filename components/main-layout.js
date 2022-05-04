@@ -17,10 +17,10 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 }
 const navigation = [
-  { name: 'Loans', href: '/', current: true },
-  { name: 'Repayments', href: '/repayments', current: false },
-  { name: 'Information', href: '#', current: false },
-  { name: 'Create', href: '/loan/create', current: false }
+  // { name: 'Loans', href: '/', current: true },
+  // { name: 'Repayments', href: '/repayments', current: false },
+  // { name: 'Information', href: '#', current: false },
+  // { name: 'Create', href: '/loan/create', current: false }
 ]
 
 function classNames(...classes) {
@@ -51,7 +51,7 @@ export default function MainLayout({ children, showCreate = true }) {
       //   .then(data => {
       //   })
       setLoadingWallet(true)
-      ergo.get_used_addresses().then(data => {
+      ergo.get_used_addresses().then((data) => {
         setErgoWalletAddress(data[0])
         localStorage.setItem('ergoWalletAddress', data[0])
       })
@@ -132,7 +132,7 @@ export default function MainLayout({ children, showCreate = true }) {
                         </div>
                         <div className="hidden md:block">
                           <div className="ml-10 flex items-baseline space-x-4">
-                            {navigation.map(item => {
+                            {navigation.map((item) => {
                               if (item.name == 'Create') {
                                 return (
                                   <a
@@ -202,7 +202,7 @@ export default function MainLayout({ children, showCreate = true }) {
 
                 <Disclosure.Panel className="border-b border-gray-700 md:hidden">
                   <div className="px-2 py-3 space-y-1 sm:px-3">
-                    {navigation.map(item => {
+                    {navigation.map((item) => {
                       if (item.name == 'Create') {
                         return (
                           <a
