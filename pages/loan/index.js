@@ -35,7 +35,7 @@ export default function PageHome({ loans }) {
       </Head>
 
       <MainLayout>
-        <div>test</div>
+        <LoanList title="loan" loanData={loans} />
       </MainLayout>
     </div>
   )

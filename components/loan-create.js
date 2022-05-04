@@ -2,7 +2,6 @@ import { useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import TextError from 'components/text-error'
 import axios from 'axios'
-import Checkbox from './check-box'
 import { createLoanTermsOfUse } from '../helper/terms-of-use'
 import { currentHeight } from '../helper/explorer'
 import { WalletContext } from '../context/wallet'
@@ -22,7 +21,7 @@ export default function LoanCreateForm() {
   } = useForm()
   const wallet = useContext(WalletContext)
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     setIsLoading(true)
 
     var createLoanApi = getCreateLoanApi()
@@ -33,7 +32,7 @@ export default function LoanCreateForm() {
       .post(createLoanApi, data, {
         headers: { 'Content-Type': 'application/json' }
       })
-      .then(res => {
+      .then((res) => {
         const submitIsSuccessful = res.data.ok
         const response = res.data
         setPopup(response)
@@ -44,7 +43,7 @@ export default function LoanCreateForm() {
         //   Router.push('/')
         // }
       })
-      .catch(error => {
+      .catch((error) => {
         const response = error.response
         setIsLoading(false)
         throw error
@@ -75,7 +74,7 @@ export default function LoanCreateForm() {
               Terms of Use
             </h3>
             <ul role="list">
-              {createLoanTermsOfUse.map(item => (
+              {createLoanTermsOfUse.map((item) => (
                 <li key={item.id} className="mt-1">
                   <p className="text-xs text-gray-500">- {item.content} </p>
                 </li>
@@ -90,7 +89,7 @@ export default function LoanCreateForm() {
                   type="checkbox"
                   className="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded"
                   checked={isTermsOfUseChecked}
-                  onChange={e => {
+                  onChange={(e) => {
                     setIsTermsOfUseChecked(e.target.checked)
                   }}
                 />
