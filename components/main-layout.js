@@ -25,7 +25,7 @@ function classNames(...classes) {
 export default function MainLayout({ children, showCreate = true }) {
   return (
     <div className="min-h-screen">
-      <div className="absolute top-0 mx-auto right-0 left-0 mb-32">
+      <div className="absolute top-0 mx-auto right-0 left-0 mb-32 z-50">
         <Disclosure as="nav">
           {({ open }) => (
             <>

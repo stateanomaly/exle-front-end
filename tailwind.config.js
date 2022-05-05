@@ -7,17 +7,17 @@ module.exports = {
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-    fontFamily: {
-      sans: ['"Space Mono"', 'monaco', 'Courier', 'monospace']
-    },
     extend: {
       colors: {
         'dark-blue': '#080321'
+      },
+      fontFamily: {
+        sans: ['"Space Mono"', 'monaco', 'Courier', 'monospace']
       }
     }
   },
   variants: {
     extend: {}
   },
-  plugins: [require('@tailwindcss/forms')]
+  plugins: [require('@tailwindcss/forms'), require('tailwindcss-font-inter')]
 }
