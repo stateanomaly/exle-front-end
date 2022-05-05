@@ -5,12 +5,16 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}'
   ],
-  darkMode: 'media', // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     fontFamily: {
       sans: ['"Space Mono"', 'monaco', 'Courier', 'monospace']
     },
-    extend: {}
+    extend: {
+      colors: {
+        'dark-blue': '#080321'
+      }
+    }
   },
   variants: {
     extend: {}

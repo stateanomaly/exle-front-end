@@ -25,7 +25,7 @@ function classNames(...classes) {
 export default function MainLayout({ children, showCreate = true }) {
   return (
     <div className="min-h-screen">
-      <div className="pb-32">
+      <div className="absolute top-0 mx-auto right-0 left-0 mb-32">
         <Disclosure as="nav">
           {({ open }) => (
             <>
@@ -159,11 +159,7 @@ export default function MainLayout({ children, showCreate = true }) {
         <header className="py-10"></header>
       </div>
 
-      <main className="-mt-48">
-        {/* Replace with your content */}
-        <div>{children}</div>
-        {/* /End replace */}
-      </main>
+      <main className="">{children}</main>
     </div>
   )
 }
