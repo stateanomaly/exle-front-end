@@ -12,7 +12,7 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 }
 const navigation = [
-  { name: 'Loans', href: '/', current: true },
+  { name: 'Loans', href: '/', current: false },
   { name: 'Repayments', href: '/repayments', current: false },
   { name: 'Information', href: '#', current: false },
   { name: 'Create', href: '/loan/create', current: false }
@@ -92,18 +92,11 @@ export default function MainLayout({ children, showCreate = true }) {
                     <div className="hidden md:block">
                       <div className="ml-4 flex items-center md:ml-6">
                         <WalletButton />
-                        <button
-                          type="button"
-                          className="bg-gray-800 p-1 text-gray-400 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                        >
-                          <span className="sr-only">View notifications</span>
-                          <BellIcon className="h-6 w-6" aria-hidden="true" />
-                        </button>
                       </div>
                     </div>
                     <div className="-mr-2 flex md:hidden">
                       {/* Mobile menu button */}
-                      <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                      <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-700 hover:bg-white hover:opacity-60 focus:outline-none   focus:ring-white">
                         <span className="sr-only">Open main menu</span>
                         {open ? (
                           <XIcon className="block h-6 w-6" aria-hidden="true" />

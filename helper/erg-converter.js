@@ -1,9 +1,9 @@
 const OneErg = 1000 * 1000 * 1000
-export const ergsToNanoErgs = erg => {
+export const ergsToNanoErgs = (erg) => {
   return erg * OneErg
 }
 
-export const nanoErgsToErgs = nanoErgs => {
+export const nanoErgsToErgs = (nanoErgs) => {
   return nanoErgs / OneErg
 }
 
@@ -22,4 +22,11 @@ const deadlineString = (deadline, currentHeight) => {
       (deadline - currentHeight) / 720
     )} days`
   else return `Ended`
+}
+
+export const compiledWalletString = (ergoWalletAddress) => {
+  let frontWalletString = ergoWalletAddress.slice(0, 4)
+  let endWalletString = ergoWalletAddress.slice(-5)
+  let compiledWalletString = frontWalletString + '...' + endWalletString
+  return compiledWalletString
 }

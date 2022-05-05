@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { ergoBoxFromProxy, RustModule } from '@ergolabs/ergo-sdk'
 import { WalletContext } from '../context/wallet'
 import Cookies from 'js-cookie'
+import { compiledWalletString } from 'helper/erg-converter'
 import { Heading } from './generic'
 const MESSAGE_COOKIE = 'YOROI_MESSAGE_COOKIE'
 
@@ -43,46 +44,52 @@ export default function WalletButton() {
     setErgoWalletAddress(null)
   }
 
-  const getWalletButton = () => {
-    if (loadingWallet === true) {
-      return (
-        <div
-          type="button"
-          className="bg-gray-800 mr-4 p-1 text-gray-400 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-        >
-          Loading...
-        </div>
-      )
-    } else if (ergoWalletAddress === null) {
-      return (
-        <button
-          type="button"
-          className="bg-gray-800 mr-4 p-1 text-gray-400 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-          onClick={connectYoroiWallet}
-        >
-          Connect Wallet
-        </button>
-      )
-    } else {
-      let frontWalletString = ergoWalletAddress.slice(0, 4)
-      let endWalletString = ergoWalletAddress.slice(-5)
-      let compiledWalletString = frontWalletString + '...' + endWalletString
-      return (
-        <button
-          type="button"
-          className="bg-gray-800 mr-4 p-1 text-gray-400 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-          onClick={disconnectYoroiWallet}
-        >
-          {compiledWalletString}
-        </button>
-      )
-    }
-  }
+  const DynamicButton = ({
+    loadingWallet,
+    ergoWalletAddress,
+    connectYoroiWallet,
+    disconnectYoroiWallet
+  }) => {
+    let config = {}
 
+    if (ergoWalletAddress) {
+      config = {
+        clickHandler: disconnectYoroiWallet,
+        label: compiledWalletString(ergoWalletAddress)
+      }
+    } else if (loadingWallet) {
+      config = {
+        clickHandler: () => {
+          return
+        },
+        label: 'Loading...'
+      }
+    } else {
+      config = {
+        clickHandler: connectYoroiWallet,
+        label: 'Connect Wallet'
+      }
+    }
+
+    return (
+      <button
+        type="button"
+        className="flex items-center justify-center rounded-full border border-body-color-2 py-[9px] px-8 text-base font-semibold text-body-color-2 transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-700 lg:px-4 xl:px-8"
+        onClick={config.clickHandler}
+      >
+        {config.label}
+      </button>
+    )
+  }
   return (
     <>
       <WalletContext.Provider value={ergoWalletAddress}>
-        {getWalletButton()}
+        <DynamicButton
+          loadingWallet={loadingWallet}
+          ergoWalletAddress={ergoWalletAddress}
+          connectYoroiWallet={connectYoroiWallet}
+          disconnectYoroiWallet={disconnectYoroiWallet}
+        />
       </WalletContext.Provider>
     </>
   )
