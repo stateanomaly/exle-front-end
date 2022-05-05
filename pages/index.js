@@ -2,6 +2,7 @@ import Head from 'next/head'
 import MainLayout from 'components/main-layout'
 import LoanList from 'components/loan-list.js'
 import axios from 'axios'
+import MarketingHeader from '~/components/marketing-header'
 
 const fetchData = async (api) =>
   await axios
@@ -25,7 +26,7 @@ const fetchRepayments = async () => {
   return fetchData(repaymentApi)
 }
 
-export default function PageHome({ loans }) {
+export default function PageHome() {
   return (
     <div className="">
       <Head>
@@ -35,20 +36,20 @@ export default function PageHome({ loans }) {
       </Head>
 
       <MainLayout>
-        <div>test</div>
+        <MarketingHeader />
       </MainLayout>
     </div>
   )
 }
 
-export const getServerSideProps = async () => {
-  const loans = await fetchLoans()
-  // const repayments = await fetchRepayments()
+// export const getServerSideProps = async () => {
+//   const loans = await fetchLoans()
+// const repayments = await fetchRepayments()
 
-  return {
-    props: {
-      loans
-      // repayments
-    }
-  }
-}
+//   return {
+//     props: {
+//       loans
+// repayments
+//     }
+//   }
+// }

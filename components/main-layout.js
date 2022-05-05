@@ -24,9 +24,9 @@ function classNames(...classes) {
 
 export default function MainLayout({ children, showCreate = true }) {
   return (
-    <div className="min-h-screen bg-gray-800">
-      <div className="bg-gray-800 pb-32">
-        <Disclosure as="nav" className="bg-gray-800">
+    <div className="min-h-screen">
+      <div className="pb-32">
+        <Disclosure as="nav">
           {({ open }) => (
             <>
               <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -160,13 +160,9 @@ export default function MainLayout({ children, showCreate = true }) {
       </div>
 
       <main className="-mt-48">
-        <div className="max-w-7xl mx-auto">
-          {/* Replace with your content */}
-          <div className="bg-gray-800 px-4 py-6 md:px-8 sm:px-6">
-            {children}
-          </div>
-          {/* /End replace */}
-        </div>
+        {/* Replace with your content */}
+        <div>{children}</div>
+        {/* /End replace */}
       </main>
     </div>
   )
