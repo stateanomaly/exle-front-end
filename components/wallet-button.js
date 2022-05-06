@@ -12,16 +12,22 @@ export default function WalletButton() {
   const [loadingWallet, setLoadingWallet] = useState(false)
 
   useEffect(() => {
-    RustModule.load().then(() => setIsRustModuleLoaded(true))
-    setErgoWalletAddress(localStorage.getItem('ergoWalletAddress'))
+    RustModule.load().then(() => {
+      console.log('rust module')
+      setIsRustModuleLoaded(true)
+      setErgoWalletAddress(localStorage.getItem('ergoWalletAddress'))
+    })
   }, [])
+
   if (!isRustModuleLoaded) {
+    console.log('not loading')
     return null
   }
 
   const connectYoroiWallet = () => {
+    console.log('trying to connect')
     if (!window.ergo_request_read_access) {
-      return Promise.reject(new Error(WARNING_MESSAGE.YOROI))
+      return Promise.reject(new Error('Yoroi not found'))
     }
 
     return window.ergo_request_read_access().then(() => {
@@ -39,17 +45,21 @@ export default function WalletButton() {
     })
   }
 
+  const connectNautilusWallet = () => {
+    console.log('trying to connect')
+    if (!window.ergoConnector.nautilus) {
+      return Promise.reject(new Error('Nautilus not found'))
+    }
+
+    return ergoConnector.nautilus.connect({ createErgoObject: false })
+  }
+
   const disconnectYoroiWallet = () => {
     Cookies.remove(MESSAGE_COOKIE)
     setErgoWalletAddress(null)
   }
 
-  const DynamicButton = ({
-    loadingWallet,
-    ergoWalletAddress,
-    connectYoroiWallet,
-    disconnectYoroiWallet
-  }) => {
+  const DynamicButton = () => {
     let config = {}
 
     if (ergoWalletAddress) {
@@ -60,13 +70,13 @@ export default function WalletButton() {
     } else if (loadingWallet) {
       config = {
         clickHandler: () => {
-          return
+          return Promise.resolve()
         },
         label: 'Loading...'
       }
     } else {
       config = {
-        clickHandler: connectYoroiWallet,
+        clickHandler: connectNautilusWallet,
         label: 'Connect Wallet'
       }
     }
@@ -75,7 +85,7 @@ export default function WalletButton() {
       <button
         type="button"
         className="flex items-center justify-center rounded-full border border-body-color-2 py-[9px] px-8 text-base font-semibold text-body-color-2 transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-700 lg:px-4 xl:px-8"
-        onClick={config.clickHandler}
+        onClick={() => config.clickHandler().then(() => console.log('done'))}
       >
         {config.label}
       </button>
@@ -84,12 +94,7 @@ export default function WalletButton() {
   return (
     <>
       <WalletContext.Provider value={ergoWalletAddress}>
-        <DynamicButton
-          loadingWallet={loadingWallet}
-          ergoWalletAddress={ergoWalletAddress}
-          connectYoroiWallet={connectYoroiWallet}
-          disconnectYoroiWallet={disconnectYoroiWallet}
-        />
+        <DynamicButton />
       </WalletContext.Provider>
     </>
   )

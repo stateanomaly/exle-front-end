@@ -3,6 +3,8 @@ import MainLayout from 'components/main-layout'
 import LoanList from 'components/loan-list.js'
 import axios from 'axios'
 import MarketingHeader from '~/components/marketing-header'
+import MarketingBlurb from '~/components/marketing-blurb'
+import SectionHeader from '~/components/section-header'
 
 const fetchData = async (api) =>
   await axios
@@ -37,6 +39,13 @@ export default function PageHome() {
 
       <MainLayout>
         <MarketingHeader />
+        <MarketingBlurb />
+        <SectionHeader
+          className="mt-36"
+          primaryText="CRYPTO FEATURE"
+          heading="Best Features"
+          paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed congue arcu, In et dignissim quam condimentum vel."
+        />
       </MainLayout>
     </div>
   )
