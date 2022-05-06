@@ -16,7 +16,6 @@ export default function MarketingBlurb() {
             <div className="px-4">
               <a
                 href="https://ergopad.io/projects/ergolend"
-                target="_blank"
                 rel="nofollow noopenner"
                 className="mb-10 flex max-w-[170px] justify-center opacity-70 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-100"
               >
@@ -30,7 +29,6 @@ export default function MarketingBlurb() {
             <div className="px-4">
               <a
                 href="https://weqntstakepool.nl/"
-                target="_blank"
                 rel="nofollow noopenner"
                 className="mb-10 flex max-w-[170px] justify-center opacity-70 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-100"
               >
@@ -44,7 +42,6 @@ export default function MarketingBlurb() {
             <div className="px-4">
               <a
                 href="https://www.youtube.com/watch?v=Wzsg94wcc_om"
-                target="_blank"
                 rel="nofollow noopenner"
                 className="mb-10 flex max-w-[170px] justify-center opacity-70 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-100"
               >
