@@ -29,7 +29,7 @@ export default function MarketingHeader() {
                     href="https://ergopad.io/projects/ergolend"
                     className="rounded-full bg-blue-600 py-3 px-8 text-base font-semibold text-white hover:bg-opacity-90 dark:hover:bg-opacity-90"
                   >
-                    See us on ErgoPad
+                    Our IDO is on ErgoPad!
                   </a>
                 </div>
               </div>

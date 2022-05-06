@@ -45,7 +45,7 @@ export default function PageHome() {
           className="mt-36"
           primaryText="PEER TO PEER"
           heading="Lending Platform"
-          paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed congue arcu, In et dignissim quam condimentum vel."
+          paragraph="Ergo-Lend is a new paradigm for lending. The goal is to leverage blockchain technology to create a global lending platform. A decentralized autonomous organization (DAO) will manage the platform."
         />
         <FeatureGrid />
       </MainLayout>

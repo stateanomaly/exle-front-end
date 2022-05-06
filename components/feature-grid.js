@@ -22,11 +22,13 @@ export default function FeatureGrid() {
           </div>
           <div>
             <h3 className="mb-3 text-xl font-bold text-black dark:text-white sm:text-3xl lg:text-xl xl:text-3xl">
-              Safe &amp; Secure
+              The Ergo Manifesto
             </h3>
             <p className="text-base font-medium text-body-color-2 dark:text-body-color sm:text-lg lg:text-base xl:text-lg">
-              Lorem ipsum dolor sit amet consectetur elit, sed do eiusmod tempor
-              labore labore labore et dolor .
+              &quot;In the eyes of the original broad community vision, the
+              tools of a cryptocurrency should allow people to do economic
+              activity whatever the business size, geographic location, or
+              interest rates set by big players.&quot;
             </p>
           </div>
         </div>
@@ -52,11 +54,12 @@ export default function FeatureGrid() {
           </div>
           <div>
             <h3 className="mb-3 text-xl font-bold text-black dark:text-white sm:text-3xl lg:text-xl xl:text-3xl">
-              Early Bonus
+              Loan Cost & Availability
             </h3>
             <p className="text-base font-medium text-body-color-2 dark:text-body-color sm:text-lg lg:text-base xl:text-lg">
-              Lorem ipsum dolor sit amet consectetur elit, sed do eiusmod tempor
-              labore labore labore et dolor .
+              Our financial system is not designed to provide small loans at
+              reasonable rates. This is true at every level, from large banks to
+              small microfinance institutions.
             </p>
           </div>
         </div>
@@ -90,8 +93,7 @@ export default function FeatureGrid() {
               Universal Access
             </h3>
             <p className="text-base font-medium text-body-color-2 dark:text-body-color sm:text-lg lg:text-base xl:text-lg">
-              Lorem ipsum dolor sit amet consectetur elit, sed do eiusmod tempor
-              labore labore labore et dolor .
+              The central problem for unbanked borrowers is getting a loan.
             </p>
           </div>
         </div>
@@ -120,8 +122,8 @@ export default function FeatureGrid() {
               Secure Storage
             </h3>
             <p className="text-base font-medium text-body-color-2 dark:text-body-color sm:text-lg lg:text-base xl:text-lg">
-              Lorem ipsum dolor sit amet consectetur elit, sed do eiusmod tempor
-              labore labore labore et dolor .
+              Be your own bank. Trustless peer to peer payments and privacy are
+              extremely important.
             </p>
           </div>
         </div>
@@ -147,11 +149,12 @@ export default function FeatureGrid() {
           </div>
           <div>
             <h3 className="mb-3 text-xl font-bold text-black dark:text-white sm:text-3xl lg:text-xl xl:text-3xl">
-              Low Cost
+              Operational & Underwriting Costs
             </h3>
             <p className="text-base font-medium text-body-color-2 dark:text-body-color sm:text-lg lg:text-base xl:text-lg">
-              Lorem ipsum dolor sit amet consectetur elit, sed do eiusmod tempor
-              labore labore labore et dolor .
+              Underwriting costs are more expensive for people in rural areas.
+              With ubiquitous cell phone access, financial services can be an
+              app away.
             </p>
           </div>
         </div>
@@ -177,11 +180,12 @@ export default function FeatureGrid() {
           </div>
           <div>
             <h3 className="mb-3 text-xl font-bold text-black dark:text-white sm:text-3xl lg:text-xl xl:text-3xl">
-              Several Profit
+              Remove the Middlemen
             </h3>
             <p className="text-base font-medium text-body-color-2 dark:text-body-color sm:text-lg lg:text-base xl:text-lg">
-              Lorem ipsum dolor sit amet consectetur elit, sed do eiusmod tempor
-              labore labore labore et dolor .
+              With lower borrowing costs, smaller loans become viable. This
+              opens up a large, untapped market of borrowers. And, it is not
+              only borrowers that can benef
             </p>
           </div>
         </div>
