@@ -5,6 +5,7 @@ import axios from 'axios'
 import MarketingHeader from '~/components/marketing-header'
 import MarketingBlurb from '~/components/marketing-blurb'
 import SectionHeader from '~/components/section-header'
+import FeatureGrid from '~/components/feature-grid'
 
 const fetchData = async (api) =>
   await axios
@@ -42,10 +43,11 @@ export default function PageHome() {
         <MarketingBlurb />
         <SectionHeader
           className="mt-36"
-          primaryText="CRYPTO FEATURE"
-          heading="Best Features"
+          primaryText="PEER TO PEER"
+          heading="Lending Platform"
           paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed congue arcu, In et dignissim quam condimentum vel."
         />
+        <FeatureGrid />
       </MainLayout>
     </div>
   )

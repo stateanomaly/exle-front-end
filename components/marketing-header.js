@@ -16,7 +16,7 @@ export default function MarketingHeader() {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto max-w-[720px] text-center">
-                <h1 className="mb-4 font-bold leading-tight text-black dark:text-white text-[45px]">
+                <h1 className="mb-4 font-bold leading-tight text-black dark:text-white text-[55px]">
                   Welcome to Ergo-Lend
                 </h1>
                 <p className="mx-auto mb-4 max-w-[620px] text-lg font-medium text-body-color-2 dark:text-white">
