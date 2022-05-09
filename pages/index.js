@@ -6,6 +6,8 @@ import MarketingHeader from '~/components/marketing-header'
 import MarketingBlurb from '~/components/marketing-blurb'
 import SectionHeader from '~/components/section-header'
 import FeatureGrid from '~/components/feature-grid'
+import Tokenomics from '~/components/tokenomics'
+import Timeline from '~/components/timeline'
 
 const fetchData = async (api) =>
   await axios
@@ -48,6 +50,14 @@ export default function PageHome() {
           paragraph="Ergo-Lend is a new paradigm for lending. The goal is to leverage blockchain technology to create a global lending platform. A decentralized autonomous organization (DAO) will manage the platform."
         />
         <FeatureGrid />
+        <Tokenomics />
+        <SectionHeader
+          className="mt-36"
+          primaryText="ROADMAP"
+          heading="The Timeline"
+          paragraph="Ergo-Lend started for the ErgoHack 2 hackathon and we just kept going!  We hope to help overcome some issues for the billions of unbanked people around the world.  This is some of what we have in various stages of implementation."
+        />
+        <Timeline />
       </MainLayout>
     </div>
   )
