@@ -58,6 +58,14 @@ export default function PageHome() {
           paragraph="Ergo-Lend started for the ErgoHack 2 hackathon and we just kept going!  We hope to help overcome some issues for the billions of unbanked people around the world.  This is some of what we have in various stages of implementation."
         />
         <Timeline />
+        <section className="border-y border-[#F3F4F4] pt-10 dark:border-[#2D2C4A] mt-20">
+          <SectionHeader
+            className="mt-32"
+            primaryText="OUR TEAM"
+            heading="Meet Our Core Team"
+            paragraph="Ergo-Lend is a community driven tool and series of smart contracts and is not owned by anyone - but our core team contribues as part of this community effort to help organize financial communities where there are no banking options are available"
+          />
+        </section>
       </MainLayout>
     </div>
   )
