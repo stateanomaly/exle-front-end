@@ -8,6 +8,8 @@ import SectionHeader from '~/components/section-header'
 import FeatureGrid from '~/components/feature-grid'
 import Tokenomics from '~/components/tokenomics'
 import Timeline from '~/components/timeline'
+import MeetTheTeam from '~/components/meet-the-team'
+import GlobalTeam from '~/components/global-team'
 
 const fetchData = async (api) =>
   await axios
@@ -58,13 +60,23 @@ export default function PageHome() {
           paragraph="Ergo-Lend started for the ErgoHack 2 hackathon and we just kept going!  We hope to help overcome some issues for the billions of unbanked people around the world.  This is some of what we have in various stages of implementation."
         />
         <Timeline />
-        <section className="border-y border-[#F3F4F4] pt-10 dark:border-[#2D2C4A] mt-20">
+        <section className="border-y border-[#F3F4F4] pt-10 pb-20 dark:border-[#2D2C4A] mt-20">
           <SectionHeader
             className="mt-32"
             primaryText="OUR TEAM"
             heading="Meet Our Core Team"
             paragraph="Ergo-Lend is a community driven tool and series of smart contracts and is not owned by anyone - but our core team contribues as part of this community effort to help organize financial communities where there are no banking options are available"
           />
+          <MeetTheTeam />
+        </section>
+        <section className="bg-light-bg pt-[80px] pb-20 dark:bg-[#14102C]">
+          <SectionHeader
+            className="mt-32"
+            primaryText="OUR TEAM"
+            heading="Our Global Partners"
+            paragraph="Ergo-Lend community partners around the world will begin to work on initiatives to help reach the people who need access to services that were previously only offered by banks"
+          />
+          <GlobalTeam />
         </section>
       </MainLayout>
     </div>

@@ -40,7 +40,6 @@ const timelineEvents = [
 ]
 
 const RenderTimelineObject = ({ item, isLeft = true }) => {
-  console.log(`render this item. isLeft: ${isLeft}`, item)
   const { date, text } = item
   return (
     <>
