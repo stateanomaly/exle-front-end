@@ -6,8 +6,12 @@ const timelineEvents = [
     text: 'ErgoHack II event - Ergo-Lend took first place! This got us rolling with a first version of the UI and a large portion of the ergoscript required to function.'
   },
   {
-    date: 'Dec 14, 2021',
+    date: 'End of Feb, 2022',
     text: 'We completed a full end-to-end test using fully functional ergoscript contracts, scala backend and nextjs front end.'
+  },
+  {
+    date: 'End of March, 2022',
+    text: 'Contract bug bash and refactor to fix all found bugs and improve features'
   },
   {
     date: 'May 2, 2022',
@@ -36,6 +40,14 @@ const timelineEvents = [
   {
     date: 'May 25, 2022',
     text: 'Ergo-Lend IDO on Ergodex -Liquidity will be added in both Erg/Lend and SigUSD/Lend pairs.'
+  },
+  {
+    date: 'Summer, 2022',
+    text: 'Scaling the backend for engineering and performance improvements'
+  },
+  {
+    date: 'Fall, 2022',
+    text: 'New features for both front end and backend are planned.  We will be making proposals and submitting soon.'
   }
 ]
 

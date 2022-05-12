@@ -44,10 +44,9 @@ export default function Tokenomics() {
                   Token Sale
                 </h2>
                 <p className="text-lg font-medium text-body-color-2 dark:text-body-color">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus condimentum tellus at lectus pulvinar, id auctor
-                  felis iaculis. In vestibulum neque sem, at dapibus justo
-                  facilisis in.
+                  Ergopad has the honor of facilitating the IDO of Ergo-Lend.
+                  Ergo-Lend will be a person-to-person (P2P) lending platform
+                  with easy to use tools to borrow and lend money.
                 </p>
               </div>
               <div className="wow fadeInUp space-y-4" data-wow-delay="0s">
