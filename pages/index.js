@@ -1,14 +1,20 @@
 import Head from 'next/head'
 import MainLayout from 'components/main-layout'
 import LoanList from 'components/loan-list.js'
-import mockLoans from 'mocks/loan'
-import getLoansApi from 'config/path'
 import axios from 'axios'
+import MarketingHeader from '~/components/marketing-header'
+import MarketingBlurb from '~/components/marketing-blurb'
+import SectionHeader from '~/components/section-header'
+import FeatureGrid from '~/components/feature-grid'
+import Tokenomics from '~/components/tokenomics'
+import Timeline from '~/components/timeline'
+import MeetTheTeam from '~/components/meet-the-team'
+import GlobalTeam from '~/components/global-team'
 
-const fetchData = async api =>
+const fetchData = async (api) =>
   await axios
     .get(api)
-    .then(res => ({
+    .then((res) => ({
       error: false,
       loans: res.data.items
     }))
@@ -27,7 +33,7 @@ const fetchRepayments = async () => {
   return fetchData(repaymentApi)
 }
 
-export default function PageHome({ loans, repayments }) {
+export default function PageHome() {
   return (
     <div className="">
       <Head>
@@ -37,20 +43,24 @@ export default function PageHome({ loans, repayments }) {
       </Head>
 
       <MainLayout>
-        <LoanList title="loan" loanData={loans} />
+        <MarketingHeader />
+        <MarketingBlurb />
+        <SectionHeader
+          className="mt-36"
+          primaryText="PEER TO PEER"
+          heading="Lending Platform"
+          paragraph="Ergo-Lend is a new paradigm for lending. The goal is to leverage blockchain technology to create a global lending platform. A decentralized autonomous organization (DAO) will manage the platform."
+        />
+        <FeatureGrid />
+        <Tokenomics />
+        <SectionHeader
+          className="mt-36"
+          primaryText="ROADMAP"
+          heading="The Timeline"
+          paragraph="Ergo-Lend started for the ErgoHack 2 hackathon and we just kept going!  We hope to help overcome some issues for the billions of unbanked people around the world.  This is some of what we have in various stages of implementation."
+        />
+        <Timeline />
       </MainLayout>
     </div>
   )
-}
-
-export const getServerSideProps = async () => {
-  const loans = await fetchLoans()
-  const repayments = await fetchRepayments()
-
-  return {
-    props: {
-      loans,
-      repayments
-    }
-  }
 }
