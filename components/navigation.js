@@ -63,7 +63,7 @@ export default function Navigation() {
           <>
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div className="border-b border-gray-700">
-                <div className="flex items-center justify-between h-16 px-4 sm:px-0">
+                <div className="flex items-center justify-between h-16 px-4 my-2 sm:px-0">
                   <div className="flex items-center">
                     <div className="flex-shrink-0 cursor-pointer">
                       <Link href={`/`}>
@@ -80,7 +80,9 @@ export default function Navigation() {
                     <div className="pl-3">
                       <Link href={`/`} passHref>
                         <a>
-                          <h1 className="text-white">Ergo Lend</h1>
+                          <h1 className="text-white text-3xl font-semibold">
+                            Ergo-Lend
+                          </h1>
                         </a>
                       </Link>
                     </div>
