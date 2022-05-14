@@ -185,7 +185,7 @@ export default function FeatureGrid() {
             <p className="text-base font-medium text-body-color-2 dark:text-body-color sm:text-lg lg:text-base xl:text-lg">
               With lower borrowing costs, smaller loans become viable. This
               opens up a large, untapped market of borrowers. And, it is not
-              only borrowers that can benef
+              only borrowers that can benefit.
             </p>
           </div>
         </div>
