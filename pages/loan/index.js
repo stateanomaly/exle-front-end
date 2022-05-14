@@ -41,7 +41,12 @@ export default function PageHome({ loans }) {
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({ req, res }) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=60, stale-while-revalidate=240'
+  )
+
   const loans = await fetchLoans()
   // const repayments = await fetchRepayments()
 
