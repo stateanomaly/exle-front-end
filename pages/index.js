@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import MainLayout from 'components/main-layout'
-import LoanList from 'components/loan-list.js'
-import axios from 'axios'
 import MarketingHeader from '~/components/marketing-header'
 import MarketingBlurb from '~/components/marketing-blurb'
 import SectionHeader from '~/components/section-header'
@@ -15,29 +13,6 @@ const pageTitle = 'Ergo Lend - Home'
 const pageDescription =
   'A person-to-person (P2P) lending platform with easy to use tools to borrow and lend money on the Ergo blockchain.'
 const ogImage = 'content="https://ergolend.org/images/og-image.jpg"'
-
-//TODO: Move these to a service
-const fetchData = async (api) =>
-  await axios
-    .get(api)
-    .then((res) => ({
-      error: false,
-      loans: res.data.items
-    }))
-    .catch(() => ({
-      error: true,
-      loans: null
-    }))
-
-const fetchLoans = async () => {
-  const loanApi = 'https://ergo-lend.herokuapp.com/api/lend'
-  return fetchData(loanApi)
-}
-
-const fetchRepayments = async () => {
-  const repaymentApi = 'https://ergo-lend.herokuapp.com/api/repayment'
-  return fetchData(repaymentApi)
-}
 
 export default function PageHome() {
   return (
