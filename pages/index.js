@@ -9,7 +9,7 @@ import Timeline from '~/components/timeline'
 import MeetTheTeam from '~/components/meet-the-team'
 import GlobalTeam from '~/components/global-team'
 
-const pageTitle = 'Ergo Lend - Home'
+const pageTitle = 'EXLE - Ergo P2P Loan Platform - Home'
 const pageDescription =
   'A person-to-person (P2P) lending platform with easy to use tools to borrow and lend money on the Ergo blockchain.'
 const ogImage = 'content="https://ergolend.org/images/og-image.jpg"'
