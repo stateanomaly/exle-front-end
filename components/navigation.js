@@ -81,7 +81,7 @@ export default function Navigation() {
                       <Link href={`/`} passHref>
                         <a>
                           <h1 className="text-white text-3xl font-semibold">
-                            Ergo-Lend
+                            EXLE 
                           </h1>
                         </a>
                       </Link>

@@ -17,9 +17,12 @@ export default function MarketingHeader() {
             <div className="w-full px-4">
               <div className="mx-auto max-w-[720px] text-center">
                 <h1 className="mb-4 font-bold leading-tight text-black dark:text-white text-[55px]">
-                  Welcome to Ergo-Lend
+                  Welcome to EXLE{' '}
                 </h1>
-                <p className="mx-auto mb-4 max-w-[620px] text-lg font-medium text-body-color-2 dark:text-white">
+                <div className="text-sm dark:text-white -mt-4">
+                  (formerly Ergo-Lend)
+                </div>
+                <p className="mx-auto my-4 max-w-[620px] text-lg font-medium text-body-color-2 dark:text-white">
                   A person-to-person (P2P) lending platform with easy to use
                   tools to borrow and lend money on the Ergo blockchain.
                 </p>

@@ -32,7 +32,7 @@ export default function PageHome() {
           className="mt-36"
           primaryText="PEER TO PEER"
           heading="Lending Platform"
-          paragraph="Ergo-Lend is a new paradigm for lending. The goal is to leverage blockchain technology to create a global lending platform. A decentralized autonomous organization (DAO) will manage the platform."
+          paragraph="EXLE is a new paradigm for lending. The goal is to leverage blockchain technology to create a global lending platform. A decentralized autonomous organization (DAO) will manage the platform."
         />
         <FeatureGrid />
         <Tokenomics />
@@ -40,7 +40,7 @@ export default function PageHome() {
           className="mt-36"
           primaryText="ROADMAP"
           heading="The Timeline"
-          paragraph="Ergo-Lend started for the ErgoHack 2 hackathon and we just kept going!  We hope to help overcome some issues for the billions of unbanked people around the world.  This is some of what we have in various stages of implementation."
+          paragraph="EXLE started for the ErgoHack 2 hackathon as 'Ergo-Lend' and we just kept going!  We hope to help overcome some issues for the billions of unbanked people around the world.  This is some of what we have in various stages of implementation."
         />
         <Timeline />
       </MainLayout>

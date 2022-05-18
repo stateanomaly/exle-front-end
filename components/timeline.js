@@ -35,11 +35,11 @@ const timelineEvents = [
   },
   {
     date: 'May 18, 2022',
-    text: 'Contribution period, strategic round - The contribution round lasts until May 23rd. On May 22nd, the waitlist opens and the remaining tokens will be distributed FCFS.'
+    text: 'Rebranding Ergo-Lend to EXLE.'
   },
   {
     date: 'May 25, 2022',
-    text: 'Ergo-Lend IDO on Ergodex -Liquidity will be added in both Erg/Lend and SigUSD/Lend pairs.'
+    text: 'EXLE IDO on Ergodex -Liquidity will be added in Erg/Lend pairs'
   },
   {
     date: 'Summer, 2022',
