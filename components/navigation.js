@@ -69,15 +69,15 @@ export default function Navigation() {
                       <Link href={`/`}>
                         <a>
                           <Image
-                            src="/ergo-dark.png"
+                            src="/images/logo/Exle_logo_white_horizontal.svg"
                             alt="Ergoplatform.com logo"
-                            width={40}
+                            width={165}
                             height={40}
                           />
                         </a>
                       </Link>
                     </div>
-                    <div className="pl-3">
+                    {/* <div className="pl-3">
                       <Link href={`/`} passHref>
                         <a>
                           <h1 className="text-white text-3xl font-semibold">
@@ -85,7 +85,7 @@ export default function Navigation() {
                           </h1>
                         </a>
                       </Link>
-                    </div>
+                    </div> */}
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         <RenderNavigationItems items={navigation} />
