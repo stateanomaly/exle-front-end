@@ -2,6 +2,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Yoroi Nightly [https://chrome.google.com/webstore/detail/yoroi-nightly/poonlenmfdfbjfeeballhiibknlknepo?hl=en&authuser=0]
+
+dApp Connector Nightly [https://chrome.google.com/webstore/detail/yoroi-ergo-dapp-connector/chifollcalpmjdiokipacefnpmbgjnle/related?hl=en&authuser=0]
+
 First, set the env.local variable NEXT_PUBLIC_API_BASE_URL to your scala backend server route (or ngrok tunnel address)
 
 ```dotenv

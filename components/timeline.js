@@ -30,16 +30,12 @@ const timelineEvents = [
     text: 'Contribution period, seed round - The contribution round lasts until May 16th. On May 15th, the waitlist opens and the remaining tokens will be distributed FCFS.'
   },
   {
-    date: 'May 17, 2022',
-    text: 'Strategic round whitelist - Whitelist is FCFS and those staking 12500 ergopad tokens (mini tier) get early access, at 13:00 UTC.'
-  },
-  {
     date: 'May 18, 2022',
-    text: 'Contribution period, strategic round - The contribution round lasts until May 23rd. On May 22nd, the waitlist opens and the remaining tokens will be distributed FCFS.'
+    text: 'Rebranding Ergo-Lend to EXLE.'
   },
   {
     date: 'May 25, 2022',
-    text: 'Ergo-Lend IDO on Ergodex -Liquidity will be added in both Erg/Lend and SigUSD/Lend pairs.'
+    text: 'EXLE IDO on Ergodex -Liquidity will be added in Erg/Lend pairs'
   },
   {
     date: 'Summer, 2022',
