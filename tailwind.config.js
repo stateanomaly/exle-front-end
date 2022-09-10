@@ -15,6 +15,7 @@ module.exports = {
         primary: '#3E7DFF',
         'body-color': '#B5B3BC',
         'body-color-2': '#637381',
+        'input-color': '#B5B3BC',
         'gradient-1': '#E4F2FE',
         'gradient-2': '#FFEEFE',
         'light-bg': '#F5F8FF'
